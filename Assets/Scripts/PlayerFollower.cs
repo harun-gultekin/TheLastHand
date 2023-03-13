@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerFollower : MonoBehaviour
 {
+    [SerializeField] float y_distance = 5f;
+    [SerializeField] float z_distance = 3f;
+    [SerializeField] GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +20,9 @@ public class PlayerFollower : MonoBehaviour
     }
     void setPositionRespectToPlayer()
     {
-        GameObject player = GameObject.Find("Player");
         Vector3 CameraPosition = player.transform.position;
-        CameraPosition.y += 3;
-        CameraPosition.z -= 5;
+        CameraPosition.y += y_distance;
+        CameraPosition.z -= z_distance;
         transform.position = CameraPosition;
     }
 }
