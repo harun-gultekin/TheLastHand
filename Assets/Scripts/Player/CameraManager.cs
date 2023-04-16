@@ -18,6 +18,8 @@ public class CameraManager : MonoBehaviour
     public float minimumPivotAngle = -35;
     public float maximumPivotAngle = 35;
 
+    private bool rightclicked = false;
+
     private void Awake()
     {
         targetTransform = player.transform;
@@ -28,6 +30,19 @@ public class CameraManager : MonoBehaviour
     {
         Vector3 targetPosition = Vector3.SmoothDamp(transform.position, targetTransform.position, ref cameraFollowVelocity, cameraDelay);
         transform.position = targetPosition;
+
+    }
+
+    public void RotationActivationCheck()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            rightclicked = true;
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            rightclicked = false;
+        }
 
     }
 
@@ -56,7 +71,8 @@ public class CameraManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        RotationActivationCheck();
         FollowTarget();
-        RoteteCamera();
+        if (rightclicked) RoteteCamera();
     }
 }
