@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ed607370822a839ec988bd702067b819
+guid: 4fc3a5c72277318f0bb15d501cadb620
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -33,18 +33,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: new_stop
+      name: Walk
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 13
-      lastFrame: 41
+      firstFrame: 0
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -62,11 +62,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: new_walk
+      name: Idle
       takeName: Take 001
       internalID: -998496362607748373
       firstFrame: 0
-      lastFrame: 15
+      lastFrame: 0
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

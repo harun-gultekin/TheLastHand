@@ -98,9 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d854aca74ddbd9b87bd1ca85bcea4fe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  correctRotation:
-  - 0
-  - 180
+  correctRotation: 00000000b4000000
   isPlaced: 0
 --- !u!1 &4556676658347361239
 GameObject:
@@ -154,7 +152,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5faade57bd738993d9cb3726ccd695d4, type: 2}
+  - {fileID: 2100000, guid: 2cb2e5d4bc15243178fc3da7a4e374af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
