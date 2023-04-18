@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTypeDate xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <TypeDate>
+    <guid>fe9ce2d40d3852a148aa97e0f41c895e</guid>
+    <fileName>Assets/Plugins/UnitySweeper/Editor/AssetCollector.cs</fileName>
+    <timeStamp>2022-12-13T19:37:40+03:00</timeStamp>
+    <typeFullName>
+      <string>UnitySweeper.AssetCollector</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp-Editor-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>2ad02ced9ae2fc8eeb2972b2cecb6980</guid>
+    <fileName>Assets/Plugins/UnitySweeper/Editor/AssetReferenceCollection.cs</fileName>
+    <timeStamp>2022-12-13T19:37:40+03:00</timeStamp>
+    <typeFullName>
+      <string>UnitySweeper.AssetReferenceCollection</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp-Editor-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>14f07f6c05bccd757b71f704882b3bdf</guid>
+    <fileName>Assets/Plugins/UnitySweeper/Editor/ClassReferenceCollection.cs</fileName>
+    <timeStamp>2022-12-13T19:37:40+03:00</timeStamp>
+    <typeFullName>
+      <string>UnitySweeper.ClassReferenceCollection</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp-Editor-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>87720438b0af7723d919d0a86655a4ae</guid>
+    <fileName>Assets/Plugins/UnitySweeper/Editor/CollectionData.cs</fileName>
+    <timeStamp>2022-12-13T19:37:40+03:00</timeStamp>
+    <typeFullName>
+      <string>UnitySweeper.CollectionData</string>
+      <string>UnitySweeper.TypeDate</string>
+      <string>UnitySweeper.IReferenceCollection</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp-Editor-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>0b4d3b86f0cd995e89e38f304eab1abb</guid>
+    <fileName>Assets/Plugins/UnitySweeper/Editor/FindUnusedAssetsWindow.cs</fileName>
+    <timeStamp>2022-12-13T19:37:40+03:00</timeStamp>
+    <typeFullName>
+      <string>UnitySweeper.FindUnusedAssetsWindow</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp-Editor-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>47fe14d477b33166395cdd4a63d3d121</guid>
+    <fileName>Assets/Plugins/UnitySweeper/Editor/ShaderReferenceCollection.cs</fileName>
+    <timeStamp>2022-12-13T19:37:40+03:00</timeStamp>
+    <typeFullName>
+      <string>UnitySweeper.ShaderReferenceCollection</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp-Editor-firstpass, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>4ecc8ac70ed364800963b4b52d0d0331</guid>
+    <fileName>Assets/MinimapController.cs</fileName>
+    <timeStamp>2023-04-17T22:59:02.9781051+03:00</timeStamp>
+    <typeFullName>
+      <string>MinimapController</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>c2025979841834c9c8074651df5c629e</guid>
+    <fileName>Assets/PBS Materials Variety Pack/zzz/MaterialRandomizer.cs</fileName>
+    <timeStamp>2022-08-21T20:29:00+03:00</timeStamp>
+    <typeFullName>
+      <string>MaterialRandomizer</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>9078acf195d5542a2944ccac2a8e93b9</guid>
+    <fileName>Assets/PBS Materials Variety Pack/zzz/MaterialRandomizerScript.cs</fileName>
+    <timeStamp>2022-08-21T20:28:05+03:00</timeStamp>
+    <typeFullName>
+      <string>MaterialRandomizerScript</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>622cbf93b90371c459b9a822da8e5fb6</guid>
+    <fileName>Assets/Scripts/Agent/AnimationStateController.cs</fileName>
+    <timeStamp>2023-04-17T22:59:03.0914391+03:00</timeStamp>
+    <typeFullName>
+      <string>AnimationStateController</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>8aa15625e3c38a544b8d44ffd7029098</guid>
+    <fileName>Assets/Scripts/Agent/agentAlexNavMesh.cs</fileName>
+    <timeStamp>2023-04-17T22:59:03.0881057+03:00</timeStamp>
+    <typeFullName>
+      <string>agentAlexNavMesh</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>28f7b5421fbbcb94e81db5d31e2cf866</guid>
+    <fileName>Assets/Scripts/Agent/agentOliviaScript.cs</fileName>
+    <timeStamp>2023-04-17T22:59:03.0881057+03:00</timeStamp>
+    <typeFullName>
+      <string>agentOliviaScript</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>d05cb1cfd65f593389a33dff60448539</guid>
+    <fileName>Assets/Scripts/Player/CameraManager.cs</fileName>
+    <timeStamp>2023-04-17T22:59:03.0914391+03:00</timeStamp>
+    <typeFullName>
+      <string>CameraManager</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>f047fe42a272431948c33f9b7fb7b2db</guid>
+    <fileName>Assets/Scripts/Player/PlayerFollower.cs</fileName>
+    <timeStamp>2023-04-17T22:59:03.0914391+03:00</timeStamp>
+    <typeFullName>
+      <string>PlayerFollower</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>a641f6842454660dc8de3de79540226e</guid>
+    <fileName>Assets/Scripts/Player/PlayerScript.cs</fileName>
+    <timeStamp>2023-04-17T22:59:03.0914391+03:00</timeStamp>
+    <typeFullName>
+      <string>PlayerScript</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>77aae307b98ba94bab5636c10d2bbd01</guid>
+    <fileName>Assets/Scripts/PuzzleScripts/DragComponent.cs</fileName>
+    <timeStamp>2023-04-17T22:59:03.0914391+03:00</timeStamp>
+    <typeFullName>
+      <string>DragComponent</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>a3f49b3d1f9eca228a1872780c129f1d</guid>
+    <fileName>Assets/Scripts/PuzzleScripts/PuzzleGameManager.cs</fileName>
+    <timeStamp>2023-04-17T22:59:03.0914391+03:00</timeStamp>
+    <typeFullName>
+      <string>PuzzleGameManager</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>d854aca74ddbd9b87bd1ca85bcea4fe7</guid>
+    <fileName>Assets/Scripts/PuzzleScripts/RotationHolder.cs</fileName>
+    <timeStamp>2023-04-17T22:59:03.0947724+03:00</timeStamp>
+    <typeFullName>
+      <string>RotationHolder</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>26f41f4b3bedb46308a9b24f5f1ed862</guid>
+    <fileName>Assets/Samples/Universal RP/12.1.10/URP Package Samples/LensFlares/Scripts/ScreenSpacePlacement.cs</fileName>
+    <timeStamp>2023-02-09T21:00:52+03:00</timeStamp>
+    <typeFullName>
+      <string>ScreenSpacePlacement</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>10b9657c78f0d43fe951a2bfdcdb7130</guid>
+    <fileName>Assets/Samples/Universal RP/12.1.10/URP Package Samples/RendererFeatures/KeepFrame/KeepFrameFeature.cs</fileName>
+    <timeStamp>2023-02-09T21:00:52+03:00</timeStamp>
+    <typeFullName>
+      <string>KeepFrameFeature</string>
+      <string>KeepFrameFeature+Settings</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>21aa50131bc134f04a14efdbeb7686be</guid>
+    <fileName>Assets/Samples/Universal RP/12.1.10/URP Package Samples/SharedAssets/Scripts/AutoLoadPipelineAsset.cs</fileName>
+    <timeStamp>2023-02-09T21:00:54+03:00</timeStamp>
+    <typeFullName>
+      <string>AutoLoadPipelineAsset</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>94f9f55b5897449c29f5189f47cad4bc</guid>
+    <fileName>Assets/Samples/Universal RP/12.1.10/URP Package Samples/SharedAssets/Scripts/FirstPersonController.cs</fileName>
+    <timeStamp>2023-02-09T21:00:54+03:00</timeStamp>
+    <typeFullName>
+      <string>FirstPersonController</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+  <TypeDate>
+    <guid>ec6a8ea4847174955b1c0e0e5187b438</guid>
+    <fileName>Assets/Samples/Universal RP/12.1.10/URP Package Samples/CameraStacking/3D Skybox/Scripts/SkyboxCamera.cs</fileName>
+    <timeStamp>2023-02-09T21:00:52+03:00</timeStamp>
+    <typeFullName>
+      <string>SkyboxCamera</string>
+    </typeFullName>
+    <assembly>Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</assembly>
+  </TypeDate>
+</ArrayOfTypeDate>
