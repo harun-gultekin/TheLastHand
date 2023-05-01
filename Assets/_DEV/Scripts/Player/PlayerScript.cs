@@ -32,6 +32,7 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GroundCheck();
         Jump();
         if (jState == JumpState.Ground) Move();
         if (jState == JumpState.Ground) Rotate();
@@ -57,11 +58,6 @@ public class PlayerScript : MonoBehaviour
         if ((movementVerticalInput != 0 || movementHorizontalInput != 0) && isGrounded) playerAnimator.SetBool("Walk", true);
         else playerAnimator.SetBool("Walk", false);
 
-    }
-
-    IEnumerator DelayJumpPrepare(float _delay = 0)
-    {
-        yield return new WaitForSeconds(_delay);
     }
 
     private void Jump()
@@ -104,9 +100,7 @@ public class PlayerScript : MonoBehaviour
             }
             case JumpState.Jumping:
             {
-                if (!isGrounded) JumpAction = true;
-                StartCoroutine(DelayJumpPrepare(1.0f));
-                if (isGrounded && JumpAction && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+                if (Physics.Raycast(transform.position, new Vector3(0, -0.50f), out RaycastHit hit, 0.50f) && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
                 {
                     playerAnimator.SetBool("Jump", false);
                     playerAnimator.SetBool("Walk", false);
@@ -118,7 +112,7 @@ public class PlayerScript : MonoBehaviour
             }
             case JumpState.Landing:
             {
-                if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Land"))
+                if (isGrounded && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Land"))
                 {
                     playerAnimator.SetBool("Jump", false);
                     playerAnimator.SetBool("Walk", false);
@@ -156,22 +150,23 @@ public class PlayerScript : MonoBehaviour
         transform.rotation = playerRotation;
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void GroundCheck()
     {
-    // Function for detecting when player hit ground, collision enter
-    if(other.gameObject.tag == "Ground")
+        RaycastHit hit;
+        float distance = 1f;
+        Vector3 dir = new Vector3(0, -0.08f);
+
+        Debug.DrawRay((new Vector3(transform.position.x, transform.position.y, transform.position.z)), dir, Color.green, 5);
+
+        if(Physics.Raycast(transform.position, dir, out hit, distance))
         {
             isGrounded = true;
         }
-    }
-    void OnCollisionExit(Collision other)
-    {
-        // Function for detecting when player-ground connection end, collision exit.
-        if (other.gameObject.tag == "Ground")
+        else
         {
             isGrounded = false;
-            //playerAnimator.SetFloat("jump", 0.0f);
         }
     }
+
 
 }
