@@ -30,7 +30,7 @@ public class PlayerScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         GroundCheck();
         Jump();
@@ -62,13 +62,13 @@ public class PlayerScript : MonoBehaviour
 
     private void Jump()
     {
-        //Debug.Log(jState);
+        Debug.Log(jState);
         movementJumpInput = Input.GetAxis("Jump");
         switch(jState)
         {
             case JumpState.Ground:
             {
-                if (movementJumpInput != 0 && isGrounded)
+                if (movementJumpInput != 0 && isGrounded && (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk") || playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("IdleJump") || playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("IdleJump 0")) )
                 {
                     playerAnimator.SetBool("Jump", true);
                     playerAnimator.SetBool("Walk", false);
