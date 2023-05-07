@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SequenceController : MonoBehaviour
 {
+    
+    
     public enum LevelStates
     {
         MinimapPuzzle,
