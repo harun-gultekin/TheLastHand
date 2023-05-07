@@ -25,7 +25,6 @@ public class CameraManager : MonoBehaviour
         targetTransform = player.transform;
     }
 
-
     public void FollowTarget()
     {
         Vector3 targetPosition = Vector3.SmoothDamp(transform.position, targetTransform.position, ref cameraFollowVelocity, cameraDelay);
