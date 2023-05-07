@@ -7,6 +7,8 @@ public class DragComponent : MonoBehaviour
     private Vector2 difference = Vector2.zero; //Dragging offset for mouse ScreenToWorldPoint
     public bool isCorrectlyPlaced = false; // Flag for whether the fuse is correctly placed
 
+    public Camera cam;
+
     PuzzleGameManager gameManager;
     public GameObject PuzzleBlockSpace; // Space for game object
 
@@ -26,7 +28,7 @@ public class DragComponent : MonoBehaviour
     {
         if (PuzzleBlockSpace != null && (!isCorrectlyPlaced))
         {
-            difference = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector2)transform.position;
+            difference = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition) - (Vector2)transform.position;
         }
 
     }
@@ -35,7 +37,7 @@ public class DragComponent : MonoBehaviour
     {
         if (PuzzleBlockSpace != null && (!isCorrectlyPlaced))
         {
-            transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - difference;
+            transform.position = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition) - difference;
         }
     }
 
