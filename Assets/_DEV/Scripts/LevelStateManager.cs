@@ -1,17 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using LastHand;
 using UnityEngine;
 
 public class LevelStateManager : MonoBehaviour
 {
- 
     
-    
-    
+
     enum LevelState 
     {
         Start,
         Minimap
-    
     }
 }

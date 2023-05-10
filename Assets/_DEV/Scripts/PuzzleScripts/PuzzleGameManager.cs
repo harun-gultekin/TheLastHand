@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using LastHand;
 using UnityEngine;
 
 public class PuzzleGameManager : MonoBehaviour
@@ -14,7 +13,6 @@ public class PuzzleGameManager : MonoBehaviour
 
     public GameObject WinText;
 
-    // Start is called before the first frame update
     void Start()
     {
         WinText.SetActive(false);
@@ -26,23 +24,21 @@ public class PuzzleGameManager : MonoBehaviour
         {
             Blocks[i] = BlockHolder.transform.GetChild(i).gameObject;
         }
-        
     }
 
-    public void correctMove()
+    public void CorrectMove()
     {
         correctedBlocks += 1;
-
-        //Debug.Log("correct Move");
-
+        
         if(correctedBlocks == totalBlock)
         {
             Debug.Log("You win!");
             WinText.SetActive(true);
+            Events.GamePlay.OnPuzzleWin.Call();
         }
     }
 
-    public void wrongMove()
+    public void WrongMove()
     {
         correctedBlocks -= 1;
     }

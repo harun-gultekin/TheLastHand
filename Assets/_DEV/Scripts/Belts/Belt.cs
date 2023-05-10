@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Belt : MonoBehaviour
@@ -34,7 +32,7 @@ public class Belt : MonoBehaviour
         }
     }
 
-    public Vector3 GetItemPosition()
+    private Vector3 GetItemPosition()
     {
         var padding = 0.3f;
         var position = transform.position;

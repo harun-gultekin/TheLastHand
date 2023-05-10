@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -25,14 +23,13 @@ public class CameraManager : MonoBehaviour
         targetTransform = player.transform;
     }
 
-    public void FollowTarget()
+    private void FollowTarget()
     {
         Vector3 targetPosition = Vector3.SmoothDamp(transform.position, targetTransform.position, ref cameraFollowVelocity, cameraDelay);
         transform.position = targetPosition;
-
     }
 
-    public void RotationActivationCheck()
+    private void RotationActivationCheck()
     {
         if (Input.GetMouseButtonDown(1))
         {
@@ -42,12 +39,10 @@ public class CameraManager : MonoBehaviour
         {
             rightclicked = false;
         }
-
     }
 
-    public void RoteteCamera()
+    private void RotateCamera()
     {
-
         float mouseXInput = Input.GetAxis ("Mouse X");
         float mouseYInput = Input.GetAxis ("Mouse Y");
         //Debug.Log("mouseXInput:"+mouseXInput+" mouseYInput:"+mouseYInput);
@@ -64,14 +59,12 @@ public class CameraManager : MonoBehaviour
         rotation.x = pivotAngle;
         targetRotation = Quaternion.Euler(rotation);
         cameraPivot.localRotation = targetRotation;
-
-
     }
 
     private void LateUpdate()
     {
         RotationActivationCheck();
         FollowTarget();
-        if (rightclicked) RoteteCamera();
+        if (rightclicked) RotateCamera();
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DragComponent : MonoBehaviour
@@ -30,7 +28,6 @@ public class DragComponent : MonoBehaviour
         {
             difference = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition) - (Vector2)transform.position;
         }
-
     }
 
     private void OnMouseDrag()
@@ -51,7 +48,7 @@ public class DragComponent : MonoBehaviour
             {
                 isCorrectlyPlaced = true; // Set the flag for correct move to true
                 transform.position = PuzzleBlockSpace.transform.position ; // Move the Fuse to the position of space
-                gameManager.correctMove();
+                gameManager.CorrectMove();
             }
             else
             {
@@ -59,5 +56,4 @@ public class DragComponent : MonoBehaviour
             }
         }
     }
-
 }

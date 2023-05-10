@@ -1,46 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using LastHand;
 
-public class PlayerScript : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float movementSpeed;
     public float rotationSpeed;
-    private Animator playerAnimator;
+    private Animator _playerAnimator;
     public float movementVerticalInput;
     public float movementHorizontalInput;
     public float movementJumpInput;
-    private Rigidbody selfRigidbody;
+    private Rigidbody _selfRigidbody;
     public bool isGrounded;
-    public bool JumpAction;
+    public bool jumpAction;
     public int jumpHeight = 150;
-    private float keepY;
+    private float _keepY;
     enum JumpState    {Ground, JumpPrepare, Jumping, Landing}
-    JumpState jState = JumpState.Ground;
+    JumpState _jState = JumpState.Ground;
 
-     // Camera variables
     public Transform cameraTransform;
 
-    // Start is called before the first frame update
     void Start()
     {
-        playerAnimator = GetComponentInChildren<Animator>();
-        selfRigidbody = GetComponent<Rigidbody>();
+        _playerAnimator = GetComponentInChildren<Animator>();
+        _selfRigidbody = GetComponent<Rigidbody>();
     }
-
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
         GroundCheck();
         Jump();
-        if (jState == JumpState.Ground) Move();
-        if (jState == JumpState.Ground) Rotate();
+        if (_jState == JumpState.Ground) Move();
+        if (_jState == JumpState.Ground) Rotate();
     }
 
+    private void OnEnable()
+    {
+        Events.GamePlay.OnMinimapCollider += OnMinimapCollider;
+        Events.GamePlay.OnPuzzleWin += OnPuzzleWin;
+    }
+    
+    private void OnDisable()
+    {
+        Events.GamePlay.OnMinimapCollider -= OnMinimapCollider;
+        Events.GamePlay.OnPuzzleWin -= OnPuzzleWin;
+    }
+
+    #region Movement
     private void Move()
     {
-
         // Get movement inputs from Input Manager
         movementVerticalInput = Input.GetAxis("Vertical");
         movementHorizontalInput = Input.GetAxis("Horizontal");
@@ -55,37 +62,36 @@ public class PlayerScript : MonoBehaviour
         transform.position = currentPosition + movePosition;
 
         // Animation play according to movement input, animation transitions handled by "move" and "jump" parameters which set in Animator. 0.1 is threshold for animation plays.
-        if ((movementVerticalInput != 0 || movementHorizontalInput != 0) && isGrounded) playerAnimator.SetBool("Walk", true);
-        else playerAnimator.SetBool("Walk", false);
-
+        if ((movementVerticalInput != 0 || movementHorizontalInput != 0) && isGrounded) _playerAnimator.SetBool("Walk", true);
+        else _playerAnimator.SetBool("Walk", false);
     }
 
     private void Jump()
     {
-        Debug.Log(jState);
+        Debug.Log(_jState);
         movementJumpInput = Input.GetAxis("Jump");
-        switch(jState)
+        switch(_jState)
         {
             case JumpState.Ground:
             {
-                if (movementJumpInput != 0 && isGrounded && (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk") || playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("IdleJump") || playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("IdleJump 0")) )
+                if (movementJumpInput != 0 && isGrounded && (_playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk") || _playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("IdleJump") || _playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("IdleJump 0")) )
                 {
-                    playerAnimator.SetBool("Jump", true);
-                    playerAnimator.SetBool("Walk", false);
-                    playerAnimator.SetBool("JumpRelease", false);
-                    playerAnimator.SetBool("Land", false);
-                    jState = JumpState.JumpPrepare;
+                    _playerAnimator.SetBool("Jump", true);
+                    _playerAnimator.SetBool("Walk", false);
+                    _playerAnimator.SetBool("JumpRelease", false);
+                    _playerAnimator.SetBool("Land", false);
+                    _jState = JumpState.JumpPrepare;
                 }
                 break;
             }
             case JumpState.JumpPrepare:
             {
-                if (movementJumpInput == 0 && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("JumpPrepare"))
+                if (movementJumpInput == 0 && _playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("JumpPrepare"))
                 {
-                    playerAnimator.SetBool("Jump", true);
-                    playerAnimator.SetBool("Walk", false);
-                    playerAnimator.SetBool("JumpRelease", true);
-                    playerAnimator.SetBool("Land", false);
+                    _playerAnimator.SetBool("Jump", true);
+                    _playerAnimator.SetBool("Walk", false);
+                    _playerAnimator.SetBool("JumpRelease", true);
+                    _playerAnimator.SetBool("Land", false);
                     movementVerticalInput = Input.GetAxis("Vertical");
                     movementHorizontalInput = Input.GetAxis("Horizontal");
                     Vector3 JumpForce = Vector3.zero;
@@ -93,39 +99,37 @@ public class PlayerScript : MonoBehaviour
                     JumpForce += cameraTransform.right * movementHorizontalInput * jumpHeight/2;
                     JumpForce.y = 0;
                     JumpForce += Vector3.up * jumpHeight;
-                    selfRigidbody.AddForce(JumpForce);
-                    jState = JumpState.Jumping;
+                    _selfRigidbody.AddForce(JumpForce);
+                    _jState = JumpState.Jumping;
                 }
                 break;
             }
             case JumpState.Jumping:
             {
-                if (Physics.Raycast(transform.position, new Vector3(0, -0.50f), out RaycastHit hit, 0.50f) && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+                if (Physics.Raycast(transform.position, new Vector3(0, -0.50f), out RaycastHit hit, 0.50f) && _playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
                 {
-                    playerAnimator.SetBool("Jump", false);
-                    playerAnimator.SetBool("Walk", false);
-                    playerAnimator.SetBool("JumpRelease", false);
-                    playerAnimator.SetBool("Land", true);
-                    jState = JumpState.Landing;
+                    _playerAnimator.SetBool("Jump", false);
+                    _playerAnimator.SetBool("Walk", false);
+                    _playerAnimator.SetBool("JumpRelease", false);
+                    _playerAnimator.SetBool("Land", true);
+                    _jState = JumpState.Landing;
                 }
                 break;
             }
             case JumpState.Landing:
             {
-                if (isGrounded && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Land"))
+                if (isGrounded && _playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Land"))
                 {
-                    playerAnimator.SetBool("Jump", false);
-                    playerAnimator.SetBool("Walk", false);
-                    playerAnimator.SetBool("JumpRelease", false);
-                    playerAnimator.SetBool("Land", false);
-                    JumpAction = false;
-                    jState = JumpState.Ground;
+                    _playerAnimator.SetBool("Jump", false);
+                    _playerAnimator.SetBool("Walk", false);
+                    _playerAnimator.SetBool("JumpRelease", false);
+                    _playerAnimator.SetBool("Land", false);
+                    jumpAction = false;
+                    _jState = JumpState.Ground;
                 }
                 break;
             }
-                default: break;
         }
-
         // Space Jump input from Input Manager, when it is pressed and character is on Ground, play Jump animation and add force in y-axis.
         //else playerAnimator.SetBool("Jump", false);
     }
@@ -149,7 +153,8 @@ public class PlayerScript : MonoBehaviour
 
         transform.rotation = playerRotation;
     }
-
+    #endregion
+    
     private void GroundCheck()
     {
         RaycastHit hit;
@@ -168,5 +173,21 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Minimap"))
+        {
+            Events.GamePlay.OnMinimapCollider.Call();
+        }
+    }
+    
+    private void OnMinimapCollider()
+    {
+        GetComponent<Rigidbody>().isKinematic = true;
+    }
+    
+    private void OnPuzzleWin()
+    {
+        GetComponent<Rigidbody>().isKinematic = false;
+    }
 }

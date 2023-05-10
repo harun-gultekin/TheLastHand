@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RotationHolder : MonoBehaviour
@@ -7,10 +5,10 @@ public class RotationHolder : MonoBehaviour
     int[] rotations = { 0,90,180,270 };
 
     public int[] correctRotation;
+    
     [SerializeField]
     bool isPlaced = false;
     int rotationHolder;
-
     int PossibleRots = 1;
 
     PuzzleGameManager gameManager;
@@ -19,7 +17,7 @@ public class RotationHolder : MonoBehaviour
     {
         gameManager = GameObject.Find("PuzzleGameManager").GetComponent<PuzzleGameManager>();
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         PossibleRots = correctRotation.Length;
@@ -33,7 +31,7 @@ public class RotationHolder : MonoBehaviour
             if (rotationHolder == correctRotation[0] || rotationHolder == correctRotation[1])
             {
                 isPlaced = true;
-                gameManager.correctMove();
+                gameManager.CorrectMove();
             }
         }
         else
@@ -41,28 +39,27 @@ public class RotationHolder : MonoBehaviour
             if (rotationHolder == correctRotation[0])
             {
                 isPlaced = true;
-                gameManager.correctMove();
+                gameManager.CorrectMove();
             }
         }
-        
     }
 
     private void OnMouseDown()
     {
         transform.Rotate(new Vector3(0, 0, 90));
         rotationHolder = (rotationHolder + 90) % 360;
-        //Debug.Log("Current rotation: "+rotationHolder);
+
         if (PossibleRots > 1)
         {
             if (rotationHolder == correctRotation[0] || rotationHolder == correctRotation[1] && isPlaced == false)
             {
                 isPlaced = true;
-                gameManager.correctMove();
+                gameManager.CorrectMove();
             }
-            else if (isPlaced == true)
+            else if (isPlaced)
             {
                 isPlaced = false;
-                gameManager.wrongMove();
+                gameManager.WrongMove();
             }
         }
         else
@@ -70,12 +67,12 @@ public class RotationHolder : MonoBehaviour
             if (rotationHolder == correctRotation[0] && isPlaced == false)
             {
                 isPlaced = true;
-                gameManager.correctMove();
+                gameManager.CorrectMove();
             }
-            else if (isPlaced == true)
+            else if (isPlaced)
             {
                 isPlaced = false;
-                gameManager.wrongMove();
+                gameManager.WrongMove();
             }
         }
     }
