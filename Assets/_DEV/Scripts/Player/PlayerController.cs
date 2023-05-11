@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        Debug.Log(_jState);
+        //Debug.Log(_jState);
         movementJumpInput = Input.GetAxis("Jump");
         switch(_jState)
         {

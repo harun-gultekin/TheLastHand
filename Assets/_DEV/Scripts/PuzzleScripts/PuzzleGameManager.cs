@@ -32,9 +32,10 @@ public class PuzzleGameManager : MonoBehaviour
         
         if(correctedBlocks == totalBlock)
         {
+            Events.GamePlay.OnPuzzleWin.Call();
+
             Debug.Log("You win!");
             WinText.SetActive(true);
-            Events.GamePlay.OnPuzzleWin.Call();
         }
     }
 
