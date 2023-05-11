@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         _selfRigidbody = GetComponent<Rigidbody>();
     }
     
-    void FixedUpdate()
+    void LateUpdate()
     {
         GroundCheck();
         Jump();
