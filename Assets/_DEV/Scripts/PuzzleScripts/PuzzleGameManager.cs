@@ -3,44 +3,40 @@ using UnityEngine;
 
 public class PuzzleGameManager : MonoBehaviour
 {
-    public GameObject BlockHolder;
-    public GameObject[] Blocks;
+    public GameObject blockHolder;
+    public GameObject[] blocks;
 
-    [SerializeField]
-    int totalBlock = 0;
-    [SerializeField]
-    int correctedBlocks = 0;
+    private int _totalBlock = 0;
+    private int _correctedBlocks = 0;
 
-    public GameObject WinText;
+    public GameObject winText;
 
     void Start()
     {
-        WinText.SetActive(false);
-        totalBlock = BlockHolder.transform.childCount;
-        Debug.Log(totalBlock);
-        Blocks = new GameObject[totalBlock];
+        winText.SetActive(false);
+        _totalBlock = blockHolder.transform.childCount;
+        //Debug.Log(totalBlock);
+        blocks = new GameObject[_totalBlock];
 
-        for (int i = 0; i < Blocks.Length; i++)
+        for (int i = 0; i < blocks.Length; i++)
         {
-            Blocks[i] = BlockHolder.transform.GetChild(i).gameObject;
+            blocks[i] = blockHolder.transform.GetChild(i).gameObject;
         }
     }
 
     public void CorrectMove()
     {
-        correctedBlocks += 1;
+        _correctedBlocks += 1;
         
-        if(correctedBlocks == totalBlock)
+        if(_correctedBlocks == _totalBlock)
         {
             Events.GamePlay.OnPuzzleWin.Call();
-
-            Debug.Log("You win!");
-            WinText.SetActive(true);
+            winText.SetActive(true);
         }
     }
 
     public void WrongMove()
     {
-        correctedBlocks -= 1;
+        _correctedBlocks -= 1;
     }
 }

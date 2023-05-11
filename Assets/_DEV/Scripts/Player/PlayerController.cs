@@ -178,6 +178,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Minimap"))
         {
             Events.GamePlay.OnMinimapCollider.Call();
+            collision.collider.enabled = false;
         }
     }
     
