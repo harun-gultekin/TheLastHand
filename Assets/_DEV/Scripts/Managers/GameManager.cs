@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] 
-    private GameObject puzzlePrefab;
-    
+    [SerializeField] private GameObject puzzlePrefab;
+
     private void OnEnable()
     {
         Events.GamePlay.OnMinimapCollider += OnMinimapCollider;
