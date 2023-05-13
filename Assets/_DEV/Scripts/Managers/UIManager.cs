@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public CanvasGroup minimapPanel;
+    public CanvasGroup alertPanel;
 
-    [SerializeField] private GameObject alertArea;
     [SerializeField] private Text alertText;
     
     private void OnEnable()
@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
     private void OnPuzzleWin()
     {
         ActivatePanel(minimapPanel);
-        alertArea.SetActive(true);
+        ActivatePanel(alertPanel);
         alertText.text = AlertUITexts.HIDE_AGENTS;
     }
     

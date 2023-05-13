@@ -9,7 +9,6 @@ public class LevelStateManager : MonoBehaviour
     {
         Events.Menu.StartGameButton += StartGameButton;
         
-        Events.GamePlay.OnMinimapCollider += OnMinimapCollider;
         Events.GamePlay.OnPuzzleWin += OnPuzzleWin;
     }
     
@@ -17,7 +16,6 @@ public class LevelStateManager : MonoBehaviour
     {
         Events.Menu.StartGameButton -= StartGameButton;
 
-        Events.GamePlay.OnMinimapCollider -= OnMinimapCollider;
         Events.GamePlay.OnPuzzleWin -= OnPuzzleWin;
     }
     
@@ -25,12 +23,7 @@ public class LevelStateManager : MonoBehaviour
     {
         currentState = LevelState.Start;
     }
-
-    private void OnMinimapCollider()
-    {
-        
-    }
-   
+    
     private void OnPuzzleWin()
     {
         currentState = LevelState.GetMinimap;
