@@ -2,31 +2,48 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public Transform targetTransform; // The object the camera will follow
-    public Transform cameraPivot;
-    private Vector3 cameraFollowVelocity = Vector3.zero;
-    public GameObject player;
-
-    public float cameraDelay = 0.1f;
-    public float cameraLookSpeed = 2;
-    public float cameraPivotSpeed = 2;
-
-    public float lookAngle;
-    public float pivotAngle;
-    public float minimumPivotAngle = -35;
-    public float maximumPivotAngle = 35;
+    public float CameraMoveSpeed = 120.0f;
+    public GameObject CameraFollowObj;
+    public float minimumPivotAngle = -45;
+    public float maximumPivotAngle = 60;
+    public float inputSensitivity = 150.0f;
+    public float mouseX;
+    public float mouseY;
+    private float rotY = 0.0f;
+    private float rotX = 0.0f;
 
     private bool rightclicked = false;
 
-    private void Awake()
+    void Start()
     {
-        targetTransform = player.transform;
+        Vector3 rot = transform.localRotation.eulerAngles;
+        rotY = rot.y;
+        rotX = rot.x;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+
     }
 
-    private void FollowTarget()
+    void Update()
     {
-        Vector3 targetPosition = Vector3.SmoothDamp(transform.position, targetTransform.position, ref cameraFollowVelocity, cameraDelay);
-        transform.position = targetPosition;
+        RotationActivationCheck();
+        if (rightclicked) RotateCamera();
+    }
+
+    void LateUpdate()
+    {
+        CameraUpdater();
+
+    }
+
+    void CameraUpdater()
+    {
+        Transform target = CameraFollowObj.transform;
+
+        float step = CameraMoveSpeed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+
     }
 
     private void RotationActivationCheck()
@@ -43,28 +60,13 @@ public class CameraManager : MonoBehaviour
 
     private void RotateCamera()
     {
-        float mouseXInput = Input.GetAxis ("Mouse X");
-        float mouseYInput = Input.GetAxis ("Mouse Y");
-        //Debug.Log("mouseXInput:"+mouseXInput+" mouseYInput:"+mouseYInput);
-        lookAngle += mouseXInput * cameraLookSpeed;
-        pivotAngle -= mouseYInput * cameraPivotSpeed;
-        pivotAngle = Mathf.Clamp(pivotAngle, minimumPivotAngle, maximumPivotAngle);
+        mouseX = Input.GetAxis("Mouse X");
+        mouseY = Input.GetAxis("Mouse Y");
+        rotY += mouseX * inputSensitivity * Time.deltaTime;
+        rotX += mouseY * inputSensitivity * Time.deltaTime;
 
-        Vector3 rotation = Vector3.zero;
-        rotation.y = lookAngle;
-        Quaternion targetRotation = Quaternion.Euler(rotation);
-        transform.rotation = targetRotation;
-
-        rotation = Vector3.zero;
-        rotation.x = pivotAngle;
-        targetRotation = Quaternion.Euler(rotation);
-        cameraPivot.localRotation = targetRotation;
-    }
-
-    private void LateUpdate()
-    {
-        RotationActivationCheck();
-        FollowTarget();
-        if (rightclicked) RotateCamera();
+        rotX = Mathf.Clamp(rotX, minimumPivotAngle, maximumPivotAngle);
+        Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
+        transform.rotation = localRotation;
     }
 }
