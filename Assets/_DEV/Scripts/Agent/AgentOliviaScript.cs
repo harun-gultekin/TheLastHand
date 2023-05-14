@@ -125,7 +125,8 @@ public class AgentOliviaScript : MonoBehaviour
     private void Patroling_v1()
     {
 		// Debug.Log("Patrolling yapılıyor");        
-		// Debug.Log("Agent Konum : " + transform.position + "Target Konum : " + target);
+		//Debug.Log("Olivia Agent Konum : " + transform.position + "Target Konum : " + target);
+		Debug.Log("Olivia Agent Konum : " + "Target Konum : " + target);
         if (Vector3.Distance(transform.position, target) < 2)
 		{
 		//  Debug.Log("mesafe farkı birden kücük");

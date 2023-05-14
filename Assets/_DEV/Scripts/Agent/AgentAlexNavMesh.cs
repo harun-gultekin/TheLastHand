@@ -63,9 +63,8 @@ public class AgentAlexNavMesh : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
 		UpdateDestination();
 
-
-                playerCollider = player.GetComponent<Collider>();
-        		theEnemyPovCamera = GetComponentsInChildren<UnityEngine.Camera>()[0];
+        playerCollider = player.GetComponent<Collider>();
+        theEnemyPovCamera = GetComponentsInChildren<UnityEngine.Camera>()[0];
 
     }
 
@@ -82,7 +81,7 @@ public class AgentAlexNavMesh : MonoBehaviour
             if (!thePlayerInEnemyFOV) 
             {
                 Patroling_v1();
-		        UpdateDestination();
+		        //UpdateDestination();
             }
         }
         else
@@ -104,7 +103,6 @@ public class AgentAlexNavMesh : MonoBehaviour
         if (playerInSightRange && !playerInBustedRange && thePlayerInEnemyFOV) 
         {
             ChasePlayer();
-            IterateWaypointIndex();
         }
         
 
