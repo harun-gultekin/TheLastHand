@@ -15,7 +15,6 @@ public class AgentOliviaScript : MonoBehaviour
     int waypointlndex;
     Vector3 target;
 
-
     public Transform player;
 
     public LayerMask whatIsGround, whatIsPlayer;
@@ -39,14 +38,35 @@ public class AgentOliviaScript : MonoBehaviour
     public float sightRange, bustedRange;
     public bool playerInSightRange, playerInBustedRange = false;
 
+
+    //Harun Param
+
+    // NavMeshAgent agent;
+    // public Transform[] waypoints;
+    // int waypointlndex = 0;
+    // Vector3 target;
+	public GameObject playerGameObject;
+
+
+	public bool thePlayerInEnemyFOV = false;
+	private Camera theEnemyPovCamera;
+	Collider playerCollider;
+	Plane[] planes;
+
     private void Awake()
     {
         playerInSightRange = false;
         playerInBustedRange = false;
         player = GameObject.Find("Player").transform;
+        // playerGameObject = GameObject.Find("Player");
         // GameOverUI = GameObject.Find("GameOverUI").GetComponent<Image>();
         agent = GetComponent<NavMeshAgent>();
 		UpdateDestination();
+
+
+                playerCollider = player.GetComponent<Collider>();
+        		theEnemyPovCamera = GetComponentsInChildren<UnityEngine.Camera>()[0];
+
     }
 
     private void Update()
@@ -58,7 +78,8 @@ public class AgentOliviaScript : MonoBehaviour
         if (PatrollingType == 1)
         {
             // if (!playerInSightRange && !playerInBustedRange) Patroling_v2();  random yere git demek aslında da
-            if (!playerInSightRange && !playerInBustedRange) 
+            //if (!playerInSightRange && !playerInBustedRange) 
+            if (!thePlayerInEnemyFOV) 
             {
                 Patroling_v1();
 		        UpdateDestination();
@@ -66,18 +87,36 @@ public class AgentOliviaScript : MonoBehaviour
         }
         else
         {
-            if (!playerInSightRange && !playerInBustedRange) Patroling_v1();
+            //if (!playerInSightRange && !playerInBustedRange) 
+            if (!thePlayerInEnemyFOV) 
+            {
+                Patroling_v1();
+            }
         }
-
+        /////////// Chasing !!!
+        /* Old v001
         if (playerInSightRange && !playerInBustedRange) 
         {
             ChasePlayer();
             IterateWaypointIndex();
         }
+        */
+        if (playerInSightRange && !playerInBustedRange && thePlayerInEnemyFOV) 
+        {
+            ChasePlayer();
+            IterateWaypointIndex();
+        }
         
-        if (playerInBustedRange && playerInSightRange) GameOver();
-        // if (playerInBustedRange && playerInSightRange) AttackPlayer();
 
+        /////////// GameOver State
+        //if (playerInBustedRange && playerInSightRange) 
+        if (playerInBustedRange && playerInSightRange && thePlayerInEnemyFOV) 
+        {
+            GameOver();
+        }
+        // if (playerInBustedRange && playerInSightRange) AttackPlayer();
+        Debug.Log("thePlayerInEnemyFOV Agent Olivia: " + thePlayerInEnemyFOV);
+        PlayerDetection();
 
     }
 
@@ -101,13 +140,13 @@ public class AgentOliviaScript : MonoBehaviour
         if (!walkPointSet) 
 		{
 			SearchWalkPoint();
-			Debug.Log("walkPointSet True");
+			//Debug.Log("walkPointSet True");
 		}
 
         if (walkPointSet)
 		{
             agent.SetDestination(walkPoint);
-			Debug.Log("SetDestination True");
+			// Debug.Log("SetDestination True");
 		}
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
@@ -116,7 +155,7 @@ public class AgentOliviaScript : MonoBehaviour
         if (distanceToWalkPoint.magnitude < 1f)
 		{
             walkPointSet = false;
-			Debug.Log("Walkpoint reached!");
+			// Debug.Log("Walkpoint reached!");
 		}
     }
 
@@ -125,8 +164,8 @@ public class AgentOliviaScript : MonoBehaviour
 	void UpdateDestination()
 	{
         
-		Debug.Log("UpdateDestination");
-		Debug.Log(target);
+		//Debug.Log("UpdateDestination");
+		//Debug.Log(target);
 		target = waypoints[waypointlndex].position;
 		agent.SetDestination(target);
 	}
@@ -152,7 +191,7 @@ public class AgentOliviaScript : MonoBehaviour
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
             walkPointSet = true;
-            Debug.Log("walkPointSet = true");
+            //Debug.Log("walkPointSet = true");
         }
     }
 
@@ -223,4 +262,33 @@ public class AgentOliviaScript : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
     }
+
+
+    private void PlayerDetection()
+	{
+		planes = GeometryUtility.CalculateFrustumPlanes(theEnemyPovCamera);
+		if (GeometryUtility.TestPlanesAABB(planes, playerCollider.bounds))
+		{
+			//Debug.DrawLine(theEnemyPovCamera.transform.position, playerGameObject.transform.position, Color.blue);
+			float distance = Vector3.Distance(theEnemyPovCamera.transform.position, playerGameObject.transform.position);
+			RaycastHit hit;
+            //Debug.Log("if in icinde");
+			if (Physics.Linecast ( theEnemyPovCamera.transform.position, playerGameObject.transform.position, out hit) && ( hit.collider.tag == "Player"))
+			{
+				//Debug.Log("hit.collider.tag" + hit.collider.tag);
+                //Debug.Log("thePlayerInEnemyFOV : " + thePlayerInEnemyFOV);
+				thePlayerInEnemyFOV = true;
+                //Debug.Log("if in icindeeeeeeeee");
+			}
+			else
+			{
+				thePlayerInEnemyFOV = false;
+			}
+
+		}
+		else
+		{
+			thePlayerInEnemyFOV = false;
+		}
+	}
 }

@@ -10,16 +10,20 @@ public class AnimationStateController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         //PatrollingState = "Patrolling";
-        thePlayerInBustedRange = theAgentAlexNavMesh.playerInBustedRange;
 
         //Debug.Log(animator);
     }
 
     void Update()
     {
-
-            
-        thePlayerInBustedRange = theAgentAlexNavMesh.playerInBustedRange;
+        if(theAgentAlexNavMesh.playerInBustedRange && theAgentAlexNavMesh.thePlayerInEnemyFOV)
+        {
+            thePlayerInBustedRange = true;
+        }
+        else
+        {
+           thePlayerInBustedRange = false; 
+        }
 
         if(thePlayerInBustedRange == false)
         {

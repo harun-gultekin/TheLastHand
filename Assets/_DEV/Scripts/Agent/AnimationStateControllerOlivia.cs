@@ -10,8 +10,6 @@ public class AnimationStateControllerOlivia : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         //PatrollingState = "Patrolling";
-        thePlayerInBustedRange = theAgentOliviaScript.playerInBustedRange;
-
         //Debug.Log(animator);
     }
 
@@ -19,7 +17,14 @@ public class AnimationStateControllerOlivia : MonoBehaviour
     {
 
             
-        thePlayerInBustedRange = theAgentOliviaScript.playerInBustedRange;
+        if(theAgentOliviaScript.playerInBustedRange && theAgentOliviaScript.thePlayerInEnemyFOV)
+        {
+            thePlayerInBustedRange = true;
+        }
+        else
+        {
+           thePlayerInBustedRange = false; 
+        }
 
         if(thePlayerInBustedRange == false)
         {
