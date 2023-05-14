@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using LastHand;
 using UnityEngine;
 using UnityEngine.UI;
