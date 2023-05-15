@@ -21,20 +21,17 @@ public class CameraManager : MonoBehaviour
         rotX = rot.x;
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
-
-
     }
 
     void Update()
     {
         RotationActivationCheck();
-        if (rightclicked) RotateCamera();
+        /*if (rightclicked)*/RotateCamera();
     }
 
     void LateUpdate()
     {
         CameraUpdater();
-
     }
 
     void CameraUpdater()
@@ -43,7 +40,6 @@ public class CameraManager : MonoBehaviour
 
         float step = CameraMoveSpeed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, target.position, step);
-
     }
 
     private void RotationActivationCheck()
@@ -62,7 +58,7 @@ public class CameraManager : MonoBehaviour
     {
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
-        rotY -= mouseX * inputSensitivity * Time.deltaTime;
+        rotY += mouseX * inputSensitivity * Time.deltaTime;
         rotX += mouseY * inputSensitivity * Time.deltaTime;
 
         rotX = Mathf.Clamp(rotX, minimumPivotAngle, maximumPivotAngle);

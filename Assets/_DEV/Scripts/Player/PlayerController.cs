@@ -3,7 +3,7 @@ using LastHand;
 
 public class PlayerController : MonoBehaviour
 {
-    public float movementSpeed;
+    public float movementSpeed = 5;
     public float rotationSpeed;
     private Animator _playerAnimator;
     public float movementVerticalInput;
@@ -48,32 +48,30 @@ public class PlayerController : MonoBehaviour
     #region Movement
     private void Move()
     {
-        // Get movement inputs from Input Manager
         movementVerticalInput = Input.GetAxis("Vertical");
         movementHorizontalInput = Input.GetAxis("Horizontal");
 
-        Vector3 movementDirection = new Vector3(movementHorizontalInput, 0, movementVerticalInput);
-        movementDirection.Normalize();     
-        _selfRigidbody.velocity = new Vector3(movementHorizontalInput*movementSpeed, _selfRigidbody.velocity.y, movementVerticalInput*movementSpeed);          
+        Vector3 movePosition = Vector3.zero;
+        movePosition += cameraTransform.forward * movementVerticalInput * movementSpeed * Time.deltaTime;
+        movePosition += cameraTransform.right * movementHorizontalInput * movementSpeed * Time.deltaTime;
+        movePosition.y = 0;
 
+        movePosition.Normalize();
         
-        //Vector3 currentPosition = transform.position;
-        //Vector3 movePosition = Vector3.zero;
-        //movePosition += cameraTransform.forward * movementVerticalInput * movementSpeed * Time.deltaTime;
-        //movePosition += cameraTransform.right * movementHorizontalInput * movementSpeed * Time.deltaTime;
-        //currentPosition += cameraTransform.forward * movementVerticalInput * movementSpeed * Time.deltaTime;
-        //currentPosition += cameraTransform.right * movementHorizontalInput * movementSpeed * Time.deltaTime;
-        //movePosition.y = 0;
-        //transform.position = currentPosition + movePosition;
+        _selfRigidbody.velocity = new Vector3(movePosition.x * movementSpeed, _selfRigidbody.velocity.y, movePosition.z * movementSpeed);
 
-        // Animation play according to movement input, animation transitions handled by "move" and "jump" parameters which set in Animator. 0.1 is threshold for animation plays.
-        if ((movementVerticalInput != 0 || movementHorizontalInput != 0) && isGrounded) _playerAnimator.SetBool("Walk", true);
-        else _playerAnimator.SetBool("Walk", false);
+        if ((movementVerticalInput != 0 || movementHorizontalInput != 0) && isGrounded)
+        {
+            _playerAnimator.SetBool("Walk", true);
+        }
+        else
+        {
+            _playerAnimator.SetBool("Walk", false);
+        }
     }
 
     private void Jump()
     {
-        //Debug.Log(_jState);
         movementJumpInput = Input.GetAxis("Jump");
         switch(_jState)
         {
@@ -135,8 +133,6 @@ public class PlayerController : MonoBehaviour
                 break;
             }
         }
-        // Space Jump input from Input Manager, when it is pressed and character is on Ground, play Jump animation and add force in y-axis.
-        //else playerAnimator.SetBool("Jump", false);
     }
 
     private void Rotate()
