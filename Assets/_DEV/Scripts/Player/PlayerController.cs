@@ -51,15 +51,20 @@ public class PlayerController : MonoBehaviour
         // Get movement inputs from Input Manager
         movementVerticalInput = Input.GetAxis("Vertical");
         movementHorizontalInput = Input.GetAxis("Horizontal");
-        // Take first position of object as Vector3 beginning of the frame and set new position according to movement inputs and set this Vector3 as new position
-        Vector3 currentPosition = transform.position;
-        Vector3 movePosition = Vector3.zero;
-        movePosition += cameraTransform.forward * movementVerticalInput * movementSpeed * Time.deltaTime;
-        movePosition += cameraTransform.right * movementHorizontalInput * movementSpeed * Time.deltaTime;
+
+        Vector3 movementDirection = new Vector3(movementHorizontalInput, 0, movementVerticalInput);
+        movementDirection.Normalize();     
+        _selfRigidbody.velocity = new Vector3(movementHorizontalInput*movementSpeed, _selfRigidbody.velocity.y, movementVerticalInput*movementSpeed);          
+
+        
+        //Vector3 currentPosition = transform.position;
+        //Vector3 movePosition = Vector3.zero;
+        //movePosition += cameraTransform.forward * movementVerticalInput * movementSpeed * Time.deltaTime;
+        //movePosition += cameraTransform.right * movementHorizontalInput * movementSpeed * Time.deltaTime;
         //currentPosition += cameraTransform.forward * movementVerticalInput * movementSpeed * Time.deltaTime;
         //currentPosition += cameraTransform.right * movementHorizontalInput * movementSpeed * Time.deltaTime;
-        movePosition.y = 0;
-        transform.position = currentPosition + movePosition;
+        //movePosition.y = 0;
+        //transform.position = currentPosition + movePosition;
 
         // Animation play according to movement input, animation transitions handled by "move" and "jump" parameters which set in Animator. 0.1 is threshold for animation plays.
         if ((movementVerticalInput != 0 || movementHorizontalInput != 0) && isGrounded) _playerAnimator.SetBool("Walk", true);
