@@ -113,7 +113,7 @@ public class AgentAlexNavMesh : MonoBehaviour
             GameOver();
         }
         // if (playerInBustedRange && playerInSightRange) AttackPlayer();
-        Debug.Log("thePlayerInEnemyFOV Agent Alex: " + thePlayerInEnemyFOV);
+        //Debug.Log("thePlayerInEnemyFOV Agent Alex: " + thePlayerInEnemyFOV);
         PlayerDetection();
 
     }

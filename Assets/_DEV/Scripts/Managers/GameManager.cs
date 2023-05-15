@@ -8,6 +8,8 @@ using Button = UnityEngine.UI.Button;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject puzzlePrefab;
+    [SerializeField] private GameObject puzzlePanel;  //TODO UIManager'e tasinacak
+
     [SerializeField] private Button puzzleBackButton;
 
     private void OnEnable()
@@ -18,6 +20,7 @@ public class GameManager : MonoBehaviour
         puzzleBackButton.onClick.AddListener(() =>
         {
             puzzlePrefab.SetActive(false);
+            puzzlePanel.SetActive(false);
         });
     }
     
@@ -32,10 +35,12 @@ public class GameManager : MonoBehaviour
     private void OnMinimapCollider()
     {
         puzzlePrefab.SetActive(true);
+        puzzlePanel.SetActive(true);
     }
     
     private void OnPuzzleWin()
     {
         puzzlePrefab.SetActive(false);
+        puzzlePanel.SetActive(false);
     }
 }
