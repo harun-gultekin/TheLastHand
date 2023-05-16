@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class CraneController : MonoBehaviour
 {
-   //w ileri
-   //s geri
-   //d sag
-   //a sol
-   //shift yukari
-   //ctrl asagi
-   
    public float speed = 5f;
    
    void Update()

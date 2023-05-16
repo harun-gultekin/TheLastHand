@@ -181,6 +181,12 @@ public class PlayerController : MonoBehaviour
             Events.GamePlay.OnMinimapCollider.Call();
             collision.collider.enabled = false;
         }
+        
+        if (collision.gameObject.CompareTag("Crane"))
+        {
+            Events.GamePlay.OnCraneCollider.Call();
+            collision.collider.enabled = false;
+        }
     }
     
     private void OnMinimapCollider()
