@@ -11,15 +11,12 @@ public class CameraCollision : MonoBehaviour
     public Vector3 dollyDirAdjusted;
     public float distance;
 
-
-    // Start is called before the first frame update
     void Awake()
     {
         dollyDir = transform.localPosition.normalized;
         distance = transform.localPosition.magnitude;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 desiredCameraPos = transform.parent.TransformPoint (dollyDir * maxDistance);
@@ -35,6 +32,5 @@ public class CameraCollision : MonoBehaviour
         }
 
         transform.localPosition = Vector3.Lerp(transform.localPosition, dollyDir * distance, Time.deltaTime * smooth);
-        
     }
 }

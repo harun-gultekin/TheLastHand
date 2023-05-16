@@ -115,7 +115,7 @@ public class AgentOliviaScript : MonoBehaviour
             GameOver();
         }
         // if (playerInBustedRange && playerInSightRange) AttackPlayer();
-        Debug.Log("thePlayerInEnemyFOV Agent Olivia: " + thePlayerInEnemyFOV);
+        //Debug.Log("thePlayerInEnemyFOV Agent Olivia: " + thePlayerInEnemyFOV);
         PlayerDetection();
 
     }
@@ -126,7 +126,7 @@ public class AgentOliviaScript : MonoBehaviour
     {
 		// Debug.Log("Patrolling yapılıyor");        
 		//Debug.Log("Olivia Agent Konum : " + transform.position + "Target Konum : " + target);
-		Debug.Log("Olivia Agent Konum : " + "Target Konum : " + target);
+		//Debug.Log("Olivia Agent Konum : " + "Target Konum : " + target);
         if (Vector3.Distance(transform.position, target) < 2)
 		{
 		//  Debug.Log("mesafe farkı birden kücük");
@@ -212,7 +212,7 @@ public class AgentOliviaScript : MonoBehaviour
         {
             isGameOver = true;
             // Oyunun bitiş scene gösterilmelidir.
-            Debug.Log("Yakalandın! Oyun bitti!");
+            //Debug.Log("Yakalandın! Oyun bitti!");
         }
         //SceneManager.LoadScene("MenuScene");
         //GameOverUI.SetActive(true);

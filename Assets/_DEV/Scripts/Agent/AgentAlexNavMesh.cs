@@ -209,7 +209,7 @@ public class AgentAlexNavMesh : MonoBehaviour
         {
             isGameOver = true;
             // Oyunun bitiş scene gösterilmelidir.
-            Debug.Log("Yakalandın! Oyun bitti!");
+            //Debug.Log("Yakalandın! Oyun bitti!");
         }
         //SceneManager.LoadScene("MenuScene");
         //GameOverUI.SetActive(true);

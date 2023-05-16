@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpMovementSpeed : MonoBehaviour
+public class PowerUpJump : MonoBehaviour
 {
     PlayerController pc = null;
     private bool powerUpActive = false;
@@ -11,7 +11,6 @@ public class PowerUpMovementSpeed : MonoBehaviour
     {
         pc = GameObject.Find("Player").GetComponent<PlayerController>();
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -25,9 +24,9 @@ public class PowerUpMovementSpeed : MonoBehaviour
 
     IEnumerator PowerUpWearOff(float waitTime)
     {
-        float speed = pc.movementSpeed;
-        pc.movementSpeed = pc.movementSpeed * 2;
+        int jump = pc.jumpHeight;
+        pc.jumpHeight = pc.jumpHeight * 2;
         yield return new WaitForSeconds(waitTime);
-        pc.movementSpeed = speed;
+        pc.jumpHeight = jump;
     }
 }
