@@ -161,10 +161,19 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         float distance = 1f;
         Vector3 dir = new Vector3(0, -0.08f);
+        Vector3 groundPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
+        Debug.DrawRay(groundPosition + transform.forward * 0.1f, dir, Color.green, 5);
+        Debug.DrawRay(groundPosition - transform.forward * 0.1f, dir, Color.green, 5);
+        Debug.DrawRay(groundPosition + transform.right * 0.1f, dir, Color.green, 5);
+        Debug.DrawRay(groundPosition - transform.right * 0.1f, dir, Color.green, 5);
         Debug.DrawRay((new Vector3(transform.position.x, transform.position.y, transform.position.z)), dir, Color.green, 5);
 
-        if(Physics.Raycast(transform.position, dir, out hit, distance))
+        if(Physics.Raycast(transform.position, dir, out hit, distance) ||
+            Physics.Raycast(transform.position + transform.forward * 0.1f, dir, out hit, distance) ||
+            Physics.Raycast(transform.position - transform.forward * 0.1f, dir, out hit, distance) ||
+            Physics.Raycast(transform.position + transform.right * 0.1f, dir, out hit, distance) ||
+            Physics.Raycast(transform.position - transform.right * 0.1f, dir, out hit, distance))
         {
             isGrounded = true;
         }
