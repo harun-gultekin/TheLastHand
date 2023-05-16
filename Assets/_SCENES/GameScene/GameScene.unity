@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.09757762, g: 0.10868154, b: 0.13368106, a: 1}
+  m_IndirectSpecularColor: {r: 0.097576916, g: 0.10868089, b: 0.13368039, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1677,8 +1677,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f7b5421fbbcb94e81db5d31e2cf866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameOverScreen: {fileID: 1174663253}
-  GameOverUI: {fileID: 0}
   agent: {fileID: 261720497}
   waypoints:
   - {fileID: 1758786997}
@@ -4563,8 +4561,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28f7b5421fbbcb94e81db5d31e2cf866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameOverScreen: {fileID: 1174663253}
-  GameOverUI: {fileID: 0}
   agent: {fileID: 790820768}
   waypoints:
   - {fileID: 1758786997}
@@ -7689,7 +7685,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aa15625e3c38a544b8d44ffd7029098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameOverScreen: {fileID: 1174663253}
   GameOverUI: {fileID: 0}
   agent: {fileID: 1324164781}
   waypoints:
@@ -9237,7 +9232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aa15625e3c38a544b8d44ffd7029098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameOverScreen: {fileID: 1174663253}
   GameOverUI: {fileID: 0}
   agent: {fileID: 738775590507116788}
   waypoints:
@@ -38858,7 +38852,7 @@ MonoBehaviour:
   movementJumpInput: 0
   isGrounded: 0
   jumpAction: 0
-  jumpHeight: 150
+  jumpHeight: 200
   cameraTransform: {fileID: 8084867415714558802}
 --- !u!65 &5438139574516384803
 BoxCollider:
