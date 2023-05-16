@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class AgentAlexNavMesh : MonoBehaviour
 {   
-    public GameOverScreen GameOverScreen;
+    //public GameOverScreen GameOverScreen;
     int maxTime = 0;
     public Image GameOverUI;
     public NavMeshAgent agent;
@@ -214,7 +214,7 @@ public class AgentAlexNavMesh : MonoBehaviour
         //SceneManager.LoadScene("MenuScene");
         //GameOverUI.SetActive(true);
         // GameOverUI.enabled = true;
-        GameOverScreen.Setup(maxTime);
+        //GameOverScreen.Setup(maxTime);
 
     }
 

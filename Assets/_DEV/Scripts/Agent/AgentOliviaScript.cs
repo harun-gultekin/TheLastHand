@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class AgentOliviaScript : MonoBehaviour
 {   
-    public GameOverScreen GameOverScreen;
+    //public GameOverScreen GameOverScreen;
     int maxTime = 0;
-    public Image GameOverUI;
+    //public Image GameOverUI;
     public NavMeshAgent agent;
     public Transform[] waypoints;
     int waypointlndex;
@@ -217,7 +217,7 @@ public class AgentOliviaScript : MonoBehaviour
         //SceneManager.LoadScene("MenuScene");
         //GameOverUI.SetActive(true);
         // GameOverUI.enabled = true;
-        GameOverScreen.Setup(maxTime);
+        //GameOverScreen.Setup(maxTime);
 
     }
 
