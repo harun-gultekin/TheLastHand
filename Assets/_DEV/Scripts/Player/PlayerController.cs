@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _selfRigidbody;
     public bool isGrounded;
     public bool jumpAction;
+    public bool falling;
     public int jumpHeight = 150;
     private float _keepY;
     enum JumpState    {Ground, JumpPrepare, Jumping, Landing}
@@ -27,10 +28,11 @@ public class PlayerController : MonoBehaviour
     
     void LateUpdate()
     {
+        Debug.Log(_selfRigidbody.velocity.y);
         GroundCheck();
         Jump();
-        if (_jState == JumpState.Ground) Move();
-        if (_jState == JumpState.Ground) Rotate();
+        /*if (_jState == JumpState.Ground)*/ Move();
+        /*if (_jState == JumpState.Ground)*/ Rotate();
     }
 
     private void OnEnable()
@@ -60,7 +62,7 @@ public class PlayerController : MonoBehaviour
         
         _selfRigidbody.velocity = new Vector3(movePosition.x * movementSpeed, _selfRigidbody.velocity.y, movePosition.z * movementSpeed);
 
-        if ((movementVerticalInput != 0 || movementHorizontalInput != 0) && isGrounded)
+        if ((movementVerticalInput != 0 || movementHorizontalInput != 0) && isGrounded && (_jState == JumpState.Ground))
         {
             _playerAnimator.SetBool("Walk", true);
         }
@@ -95,12 +97,12 @@ public class PlayerController : MonoBehaviour
                     _playerAnimator.SetBool("Walk", false);
                     _playerAnimator.SetBool("JumpRelease", true);
                     _playerAnimator.SetBool("Land", false);
-                    movementVerticalInput = Input.GetAxis("Vertical");
-                    movementHorizontalInput = Input.GetAxis("Horizontal");
+                    //movementVerticalInput = Input.GetAxis("Vertical");
+                    //movementHorizontalInput = Input.GetAxis("Horizontal");
                     Vector3 JumpForce = Vector3.zero;
-                    JumpForce += cameraTransform.forward * movementVerticalInput * jumpHeight/2;
-                    JumpForce += cameraTransform.right * movementHorizontalInput * jumpHeight/2;
-                    JumpForce.y = 0;
+                    //JumpForce += cameraTransform.forward * movementVerticalInput * jumpHeight/2;
+                    //JumpForce += cameraTransform.right * movementHorizontalInput * jumpHeight/2;
+                    //JumpForce.y = 0;
                     JumpForce += Vector3.up * jumpHeight;
                     _selfRigidbody.AddForce(JumpForce);
                     _jState = JumpState.Jumping;
@@ -109,7 +111,8 @@ public class PlayerController : MonoBehaviour
             }
             case JumpState.Jumping:
             {
-                if (Physics.Raycast(transform.position, new Vector3(0, -0.50f), out RaycastHit hit, 0.50f) && _playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+                /*if (Physics.Raycast(transform.position, new Vector3(0, -0.50f), out RaycastHit hit, 0.50f) && _playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))*/
+                if ((falling || isGrounded) && _playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
                 {
                     _playerAnimator.SetBool("Jump", false);
                     _playerAnimator.SetBool("Walk", false);
@@ -156,7 +159,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
     
-    private void GroundCheck()
+    /*private void GroundCheck()
     {
         RaycastHit hit;
         float distance = 1f;
@@ -181,7 +184,52 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = false;
         }
+    }*/
+    private void GroundCheck()
+    {
+        if (_selfRigidbody.velocity.y>0)
+        {
+            jumpAction = true;
+            falling = false;
+            isGrounded = false;
+
+        }
+
+        if (jumpAction && (_selfRigidbody.velocity.y<0))
+        {
+            jumpAction = true;
+            falling = true;
+            isGrounded = false;
+        }
+
+        if (falling && (_selfRigidbody.velocity.y == 0))
+        {
+            jumpAction = false;
+            falling = false;
+            isGrounded = true;
+        }
+
+        RaycastHit hit;
+        float distance = 1f;
+        Vector3 dir = new Vector3(0, -0.08f);
+        Vector3 groundPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+        Debug.DrawRay(groundPosition + transform.forward * 0.1f, dir, Color.green, 5);
+        Debug.DrawRay(groundPosition - transform.forward * 0.1f, dir, Color.green, 5);
+        Debug.DrawRay(groundPosition + transform.right * 0.1f, dir, Color.green, 5);
+        Debug.DrawRay(groundPosition - transform.right * 0.1f, dir, Color.green, 5);
+        Debug.DrawRay((new Vector3(transform.position.x, transform.position.y, transform.position.z)), dir, Color.green, 5);
+
+        if(Physics.Raycast(transform.position, dir, out hit, distance) ||
+            Physics.Raycast(transform.position + transform.forward * 0.1f, dir, out hit, distance) ||
+            Physics.Raycast(transform.position - transform.forward * 0.1f, dir, out hit, distance) ||
+            Physics.Raycast(transform.position + transform.right * 0.1f, dir, out hit, distance) ||
+            Physics.Raycast(transform.position - transform.right * 0.1f, dir, out hit, distance))
+        {
+            isGrounded = true;
+        }
     }
+
 
     public void OnCollisionEnter(Collision collision)
     {
