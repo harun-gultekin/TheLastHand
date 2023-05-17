@@ -7,7 +7,6 @@ namespace LastHand
             public static Event OnMinimapCollider = new Event(nameof(OnMinimapCollider));
             public static Event OnPuzzleWin = new Event(nameof(OnPuzzleWin));
             public static Event OnCraneCollider = new Event(nameof(OnCraneCollider));
-
         }
     }
 }

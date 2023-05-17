@@ -3006,7 +3006,7 @@ GameObject:
   - component: {fileID: 604360686}
   m_Layer: 0
   m_Name: TurnValve
-  m_TagString: Minimap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6431,6 +6431,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thePlayerInBustedRange: 0
   theAgentOliviaScript: {fileID: 790820769}
+--- !u!1 &1076580050 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5814865962017191393, guid: ae0737587bbbea0a18dfd6d209592c8b, type: 3}
+  m_PrefabInstance: {fileID: 684262392}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1131040890
 GameObject:
   m_ObjectHideFlags: 0
@@ -9442,7 +9447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1310dcba7d45478eaaed498341f67db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzlePrefab: {fileID: 1824525205}
+  puzzlePrefab: {fileID: 1076580050}
   puzzlePanel: {fileID: 1983826707}
   puzzleBackButton: {fileID: 932167929}
   cranePrefab: {fileID: 827109031}
