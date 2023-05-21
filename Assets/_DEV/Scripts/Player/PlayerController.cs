@@ -122,31 +122,30 @@ public class PlayerController : MonoBehaviour
             }
             case HideState.HoldDrawer:
             {
-                float step = movementSpeed * Time.deltaTime;
-                holdPoint.transform.localPosition = Vector3.MoveTowards(holdPoint.transform.localPosition, new Vector3(-0.01f,1.887f,0.05f), step);
-                transform.position = Vector3.MoveTowards(transform.position, holdPoint.transform.position, step);
-                if ((holdPoint.transform.localPosition == new Vector3(-0.01f,1.887f,0.05f)) && _playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Hold"))
+                if (_playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Hold"))
                 {
-                    _selfRigidbody.constraints = RigidbodyConstraints.None;
-                    _selfRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-                    _selfRigidbody.useGravity = true;
-                    _playerAnimator.SetBool("Jump", false);
-                    _playerAnimator.SetBool("Walk", false);
-                    _playerAnimator.SetBool("JumpRelease", false);
-                    _playerAnimator.SetBool("Land", true);
-                    _playerAnimator.SetBool("Hold", false);
-                    _hState = HideState.Landing;
+                    float step = movementSpeed * Time.deltaTime;
+                    holdPoint.transform.localPosition = Vector3.MoveTowards(holdPoint.transform.localPosition, new Vector3(-0.01f,1.887f,0.05f), step);
+                    transform.position = Vector3.MoveTowards(transform.position, holdPoint.transform.position, step);
+                    if (holdPoint.transform.localPosition == new Vector3(-0.01f,1.887f,0.05f))
+                    {
+                        _selfRigidbody.constraints = RigidbodyConstraints.None;
+                        _selfRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+                        _selfRigidbody.useGravity = true;
+                        _playerAnimator.SetBool("Jump", false);
+                        _playerAnimator.SetBool("Walk", false);
+                        _playerAnimator.SetBool("JumpRelease", false);
+                        _playerAnimator.SetBool("Land", true);
+                        _playerAnimator.SetBool("Hold", false);
+                        _hState = HideState.Landing;
+                    }
                 }
+
                 break;
             }
 
             case HideState.Landing:
             {
-                RaycastHit hit;
-                float distance = 1f;
-                Vector3 dir = new Vector3(0, -0.08f);
-                Debug.DrawRay(transform.position, dir, Color.yellow, 5);
-
                 if(enableColliderPoint + 0.2f > transform.position.y)
                 {
                     _selfCollider.enabled = true;
