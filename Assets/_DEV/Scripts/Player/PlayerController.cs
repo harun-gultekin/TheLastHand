@@ -23,8 +23,11 @@ public class PlayerController : MonoBehaviour
     HideState _hState = HideState.Ground;
     public bool hidingDrawer = false;
     private bool hideCapability = false;
-    public GameObject holdPoint;
+    private GameObject holdPoint;
     private float enableColliderPoint;
+    private GameObject hidingTrigger;
+    private GameObject closeDrawer;
+    public bool hidingStatus = false;
 
     private float distHoldPoint;
 
@@ -172,7 +175,9 @@ public class PlayerController : MonoBehaviour
     {
         if (hideCapability && Input.GetKeyDown(KeyCode.E) && !hidingDrawer)
         {
+            hideCapability = false;
             hidingDrawer = true;
+            Destroy(hidingTrigger.GetComponent<Collider>());
         }
     }
 
@@ -356,9 +361,11 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.name == "HidingTrigger")
         {
+            hidingTrigger = collision.gameObject;
             hideCapability = true;
             holdPoint = collision.gameObject.transform.GetChild(0).gameObject;
         }
+
     }
 
     private void OnTriggerExit(Collider collision)
