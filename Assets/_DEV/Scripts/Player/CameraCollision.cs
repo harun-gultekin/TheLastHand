@@ -10,9 +10,11 @@ public class CameraCollision : MonoBehaviour
     Vector3 dollyDir;
     public Vector3 dollyDirAdjusted;
     public float distance;
+    private GameObject player;
 
     void Awake()
     {
+        player = GameObject.Find("Player");
         dollyDir = transform.localPosition.normalized;
         distance = transform.localPosition.magnitude;
     }
@@ -22,7 +24,7 @@ public class CameraCollision : MonoBehaviour
         Vector3 desiredCameraPos = transform.parent.TransformPoint (dollyDir * maxDistance);
         RaycastHit hit;
 
-        if (Physics.Linecast (transform.parent.position, desiredCameraPos, out hit))
+        if (Physics.Linecast (transform.parent.position, desiredCameraPos, out hit) && !player.GetComponent<PlayerController>().hidingStatus)
         {
             distance = Mathf.Clamp ((hit.distance * 0.9f), minDistance, maxDistance);
         }
