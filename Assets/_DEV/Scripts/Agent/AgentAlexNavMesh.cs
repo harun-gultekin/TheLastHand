@@ -171,7 +171,8 @@ public class AgentAlexNavMesh : MonoBehaviour
     {
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
-        transform.LookAt(player);
+        // transform.LookAt(player);  // problemle, ajanlar yamuluyor.
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
         if (!isGameOver)
         {
