@@ -55,6 +55,7 @@ public class AgentOliviaScript : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInBustedRange = Physics.CheckSphere(transform.position, bustedRange, whatIsPlayer);
 
+
         //***Patrolling State***//
         if (PatrollingType == 1)
         {
@@ -163,7 +164,7 @@ public class AgentOliviaScript : MonoBehaviour
 
     private void ChasePlayer()
     {
-        agent.SetDestination(player.position);
+        agent.SetDestination(new Vector3(player.position.x, transform.position.y, player.position.z));
         PatrollingType = 1;
     }
 
@@ -171,7 +172,8 @@ public class AgentOliviaScript : MonoBehaviour
     {
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
-        transform.LookAt(player);
+        // transform.LookAt(player);  // problemle, ajanlar yamuluyor.
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
         if (!isGameOver)
         {
