@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using LastHand;
 
@@ -32,6 +34,8 @@ public class PlayerController : MonoBehaviour
     private float distHoldPoint;
     
     public Transform cameraTransform;
+
+    private Coroutine _activateCollider;
 
     void Start()
     {
@@ -348,7 +352,13 @@ public class PlayerController : MonoBehaviour
             if (LevelStateManager.Instance.currentState == LevelState.Started)
             {
                 collision.enabled = false;
-                //TODO start ise belli sure sonra collider ac tekrar
+
+                if (_activateCollider != null)
+                {
+                    StopCoroutine(_activateCollider);
+                }
+                
+                _activateCollider = StartCoroutine(ActivateCollider(collision));
             }
             else
             {
@@ -376,6 +386,12 @@ public class PlayerController : MonoBehaviour
         {
             hideCapability = false;
         }
+    }
+    
+    IEnumerator ActivateCollider(Collider collision)
+    {
+        yield return new WaitForSeconds(5);
+        collision.enabled = true;
     }
     
     private void OnMinimapCollider()

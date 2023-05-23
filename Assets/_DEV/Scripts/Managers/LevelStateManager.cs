@@ -14,14 +14,12 @@ public class LevelStateManager : MonoBehaviour
     private void OnEnable()
     {
         Events.Menu.StartGameButton += StartGameButton;
-        
         Events.GamePlay.OnPuzzleWin += OnPuzzleWin;
     }
     
     private void OnDisable()
     {
         Events.Menu.StartGameButton -= StartGameButton;
-
         Events.GamePlay.OnPuzzleWin -= OnPuzzleWin;
     }
     

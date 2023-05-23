@@ -6,16 +6,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject puzzlePrefab;
-    
     [SerializeField] private GameObject cranePrefab;
     [SerializeField] private GameObject craneCamera;
-
+    [SerializeField] private GameObject craneLimits;
+    
     private void OnEnable()
     {
         Events.GamePlay.OnMinimapCollider += OnMinimapCollider;
         Events.GamePlay.OnPuzzleWin += OnPuzzleWin;
         Events.GamePlay.OnCraneCollider += OnCraneCollider;
-        
         Events.UIGamePlay.OnPuzzleClose += OnPuzzleClose;
     }
     
@@ -24,7 +23,6 @@ public class GameManager : MonoBehaviour
         Events.GamePlay.OnMinimapCollider -= OnMinimapCollider;
         Events.GamePlay.OnPuzzleWin -= OnPuzzleWin;
         Events.GamePlay.OnCraneCollider -= OnCraneCollider;
-        
         Events.UIGamePlay.OnPuzzleClose -= OnPuzzleClose;
     }
     
@@ -40,9 +38,9 @@ public class GameManager : MonoBehaviour
     
     private void OnCraneCollider()
     {
-        cranePrefab.SetActive(true);
+        craneLimits.SetActive(true);
         craneCamera.SetActive(true);
-
+        cranePrefab.SetActive(true);
         cranePrefab.GetComponent<CraneController>().enabled = true;
     }
     
