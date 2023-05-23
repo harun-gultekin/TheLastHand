@@ -8,14 +8,13 @@ public class CloseDrawer : MonoBehaviour
     private bool b_move = false;
     private bool close = false;
     private bool open = false;
-    // Start is called before the first frame update
+
     void Start()
     {
         close = true;
         open = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (b_move && Input.GetKeyDown(KeyCode.E))
@@ -57,7 +56,6 @@ public class CloseDrawer : MonoBehaviour
             collision.gameObject.GetComponent<PlayerController>().hidingStatus = true;
             b_move = true;
         }
-
     }
 
     private void OnTriggerExit(Collider collision)

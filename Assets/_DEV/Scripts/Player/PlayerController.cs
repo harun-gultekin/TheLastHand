@@ -30,8 +30,7 @@ public class PlayerController : MonoBehaviour
     public bool hidingStatus = false;
 
     private float distHoldPoint;
-
-
+    
     public Transform cameraTransform;
 
     void Start()
@@ -55,21 +54,25 @@ public class PlayerController : MonoBehaviour
         {
             HideDrawer();
         }
-
     }
 
     private void OnEnable()
     {
         Events.GamePlay.OnMinimapCollider += OnMinimapCollider;
         Events.GamePlay.OnPuzzleWin += OnPuzzleWin;
+        
+        Events.UIGamePlay.OnPuzzleClose += OnPuzzleClose;
     }
     
     private void OnDisable()
     {
         Events.GamePlay.OnMinimapCollider -= OnMinimapCollider;
         Events.GamePlay.OnPuzzleWin -= OnPuzzleWin;
+        
+        Events.UIGamePlay.OnPuzzleClose -= OnPuzzleClose;
     }
 
+    #region Drawer Hide
     private void HideDrawer()
     {
         switch(_hState)
@@ -165,9 +168,6 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
             }
-
-
-
         }
     }
 
@@ -180,6 +180,8 @@ public class PlayerController : MonoBehaviour
             Destroy(hidingTrigger.GetComponent<Collider>());
         }
     }
+    
+    #endregion
 
     #region Movement
     private void Move()
@@ -271,9 +273,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-
-
+    
     private void Rotate()
     {
         Vector3 targetDirection = Vector3.zero;
@@ -302,7 +302,6 @@ public class PlayerController : MonoBehaviour
             jumpAction = true;
             falling = false;
             isGrounded = false;
-
         }
 
         if (jumpAction && (_selfRigidbody.velocity.y<0))
@@ -340,32 +339,34 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-    public void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Minimap"))
         {
             Events.GamePlay.OnMinimapCollider.Call();
-            collision.collider.enabled = false;
+            
+            if (LevelStateManager.Instance.currentState == LevelState.Started)
+            {
+                //TODO start ise belli sure sonra collider ac tekrar
+            }
+            else
+            {
+                collision.enabled = false;
+            }
         }
         
         if (collision.gameObject.CompareTag("Crane"))
         {
             Events.GamePlay.OnCraneCollider.Call();
-            collision.collider.enabled = false;
+            collision.enabled = false;
         }
-
-    }
-
-    private void OnTriggerEnter(Collider collision)
-    {
+        
         if (collision.gameObject.name == "HidingTrigger")
         {
             hidingTrigger = collision.gameObject;
             hideCapability = true;
             holdPoint = collision.gameObject.transform.GetChild(0).gameObject;
         }
-
     }
 
     private void OnTriggerExit(Collider collision)
@@ -382,6 +383,11 @@ public class PlayerController : MonoBehaviour
     }
     
     private void OnPuzzleWin()
+    {
+        GetComponent<Rigidbody>().isKinematic = false;
+    }
+    
+    private void OnPuzzleClose()
     {
         GetComponent<Rigidbody>().isKinematic = false;
     }

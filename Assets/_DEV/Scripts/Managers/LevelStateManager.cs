@@ -3,8 +3,14 @@ using UnityEngine;
 
 public class LevelStateManager : MonoBehaviour
 {
+    public static LevelStateManager Instance;
     public LevelState currentState;
     
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void OnEnable()
     {
         Events.Menu.StartGameButton += StartGameButton;
@@ -21,19 +27,17 @@ public class LevelStateManager : MonoBehaviour
     
     private void StartGameButton()
     {
-        currentState = LevelState.Start;
+        currentState = LevelState.Started;
     }
     
     private void OnPuzzleWin()
     {
-        currentState = LevelState.GetMinimap;
+        currentState = LevelState.MinimapTaken;
     }
 }
 
 public enum LevelState 
 {
-    Start,
-    GetMinimap,
-    HideAgents,
-    TurnValve
+    Started,
+    MinimapTaken,
 }

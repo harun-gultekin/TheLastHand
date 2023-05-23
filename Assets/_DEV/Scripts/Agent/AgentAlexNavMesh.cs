@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 
 public class AgentAlexNavMesh : MonoBehaviour
 {   
     //public GameOverScreen GameOverScreen;
     int maxTime = 0;
-    public Image GameOverUI;
+    //public Image GameOverUI;
     public NavMeshAgent agent;
     public Transform[] waypoints;
     int waypointlndex;
