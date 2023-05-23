@@ -5,11 +5,8 @@ using UnityEngine;
 public class CraneController : MonoBehaviour
 {
    public float speed = 5f;
-
-   [SerializeField] private GameObject verticalMoveObject;
-   [SerializeField] private GameObject horizontalMoveObject;
    
-   //TODO separate movement !!
+   //TODO boundry ekle ve up-down/left-right ayir
    void Update()
    {
       float horizontalInput = Input.GetAxis("Horizontal");
@@ -26,14 +23,10 @@ public class CraneController : MonoBehaviour
       {
          verticalSpeed = 1f;   
       }
+      
+      Vector3 movement = new Vector3(horizontalInput, verticalSpeed, verticalInput);
+      movement.Normalize();  
 
-      Vector3 movementVertical = new Vector3(horizontalInput, verticalSpeed, verticalInput);
-      Vector3 movementHorizontal = new Vector3(horizontalInput, horizontalMoveObject.transform.position.y, horizontalMoveObject.transform.position.z);
-
-      movementVertical.Normalize();  
-      movementHorizontal.Normalize();  
-
-      verticalMoveObject.transform.Translate(movementVertical * speed * Time.deltaTime);
-      horizontalMoveObject.transform.Translate(movementHorizontal * speed * Time.deltaTime);
+      transform.Translate(movement * speed * Time.deltaTime);
    }
 }
