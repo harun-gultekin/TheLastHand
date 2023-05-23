@@ -17,8 +17,11 @@ public class PowerUpJump : MonoBehaviour
         if (other.tag == "Player" && !powerUpActive)
         {
             powerUpActive = true;
+            GetComponent<Collider>().enabled = false;
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
             StartCoroutine(PowerUpWearOff(5));
             powerUpActive = false;
+            StartCoroutine(Cooldown(30));
         }
     }
 
@@ -28,5 +31,12 @@ public class PowerUpJump : MonoBehaviour
         pc.jumpHeight = pc.jumpHeight * 2;
         yield return new WaitForSeconds(waitTime);
         pc.jumpHeight = jump;
+    }
+
+    IEnumerator Cooldown(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        GetComponent<Collider>().enabled = true;
+        gameObject.transform.GetChild(0).gameObject.SetActive(true);
     }
 }

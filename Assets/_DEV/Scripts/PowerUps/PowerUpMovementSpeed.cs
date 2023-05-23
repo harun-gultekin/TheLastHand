@@ -17,8 +17,11 @@ public class PowerUpMovementSpeed : MonoBehaviour
         if (other.tag == "Player" && !powerUpActive)
         {
             powerUpActive = true;
+            GetComponent<Collider>().enabled = false;
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
             StartCoroutine(PowerUpWearOff(5));
             powerUpActive = false;
+            StartCoroutine(Cooldown(30));
         }
     }
 
@@ -28,5 +31,12 @@ public class PowerUpMovementSpeed : MonoBehaviour
         pc.movementSpeed = pc.movementSpeed * 2;
         yield return new WaitForSeconds(waitTime);
         pc.movementSpeed = speed;
+    }
+
+    IEnumerator Cooldown(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        GetComponent<Collider>().enabled = true;
+        gameObject.transform.GetChild(0).gameObject.SetActive(true);
     }
 }
