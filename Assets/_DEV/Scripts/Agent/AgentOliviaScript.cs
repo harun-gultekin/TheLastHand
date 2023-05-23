@@ -7,78 +7,57 @@ using UnityEngine.SceneManagement;
 
 public class AgentOliviaScript : MonoBehaviour
 {   
-    //public GameOverScreen GameOverScreen;
-    int maxTime = 0;
-    //public Image GameOverUI;
+
     public NavMeshAgent agent;
     public Transform[] waypoints;
     int waypointlndex;
     Vector3 target;
 
     public Transform player;
-
     public LayerMask whatIsGround, whatIsPlayer;
 
-    public float health;
-
-    //Patroling
+    //***Patroling Parameters***//
     private int PatrollingType = 0 ;
-    public Vector3 walkPoint;
+    private Vector3 walkPoint;
     bool walkPointSet;
     public float walkPointRange;
 
-    //GameOver
-    
+    //***GameOver Parameters***//
 	private bool isGameOver = false; // Oyunun bitip bitmediği bilgisini tutar
-    public float timeBetweenAttacks;
-    bool alreadyAttacked;
-    public GameObject projectile;
 
-    //States
+    //***States Parameters***//
     public float sightRange, bustedRange;
-    public bool playerInSightRange, playerInBustedRange = false;
+    public bool thePlayerInEnemyFOV, playerInSightRange, playerInBustedRange = false;
 
 
-    //Harun Param
-
-    // NavMeshAgent agent;
-    // public Transform[] waypoints;
-    // int waypointlndex = 0;
-    // Vector3 target;
+    //***thePlayerInEnemyFOV Parameters***//
 	public GameObject playerGameObject;
-
-
-	public bool thePlayerInEnemyFOV = false;
 	private Camera theEnemyPovCamera;
 	Collider playerCollider;
 	Plane[] planes;
 
     private void Awake()
     {
+		UpdateDestination();
         playerInSightRange = false;
         playerInBustedRange = false;
+        thePlayerInEnemyFOV = false;
         player = GameObject.Find("Player").transform;
-        // playerGameObject = GameObject.Find("Player");
-        // GameOverUI = GameObject.Find("GameOverUI").GetComponent<Image>();
         agent = GetComponent<NavMeshAgent>();
-		UpdateDestination();
-
-
-                playerCollider = player.GetComponent<Collider>();
-        		theEnemyPovCamera = GetComponentsInChildren<UnityEngine.Camera>()[0];
-
+        // For thePlayerInEnemyFOV
+        playerCollider = player.GetComponent<Collider>();
+        theEnemyPovCamera = GetComponentsInChildren<UnityEngine.Camera>()[0];
     }
 
     private void Update()
     {
-        //Check for sight and attack range
+        //Check for sight and busted range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInBustedRange = Physics.CheckSphere(transform.position, bustedRange, whatIsPlayer);
 
+        //***Patrolling State***//
         if (PatrollingType == 1)
         {
-            // if (!playerInSightRange && !playerInBustedRange) Patroling_v2();  random yere git demek aslında da
-            //if (!playerInSightRange && !playerInBustedRange) 
             if (!thePlayerInEnemyFOV) 
             {
                 Patroling_v1();
@@ -87,44 +66,33 @@ public class AgentOliviaScript : MonoBehaviour
         }
         else
         {
-            //if (!playerInSightRange && !playerInBustedRange) 
             if (!thePlayerInEnemyFOV) 
             {
                 Patroling_v1();
             }
         }
-        /////////// Chasing !!!
-        /* Old v001
-        if (playerInSightRange && !playerInBustedRange) 
-        {
-            ChasePlayer();
-            IterateWaypointIndex();
-        }
-        */
+
+        //***Chasing State***//
         if (playerInSightRange && !playerInBustedRange && thePlayerInEnemyFOV) 
         {
             ChasePlayer();
             IterateWaypointIndex();
         }
+    
         
-
-        /////////// GameOver State
-        //if (playerInBustedRange && playerInSightRange) 
+        //***GameOver State***//
         if (playerInBustedRange && playerInSightRange && thePlayerInEnemyFOV) 
         {
             GameOver();
         }
-        // if (playerInBustedRange && playerInSightRange) AttackPlayer();
-        //Debug.Log("thePlayerInEnemyFOV Agent Olivia: " + thePlayerInEnemyFOV);
+
         PlayerDetection();
-
     }
-
 
 
     private void Patroling_v1()
     {
-		// Debug.Log("Patrolling yapılıyor");        
+		//Debug.Log("Patrolling yapılıyor");        
 		//Debug.Log("Olivia Agent Konum : " + transform.position + "Target Konum : " + target);
 		//Debug.Log("Olivia Agent Konum : " + "Target Konum : " + target);
         if (Vector3.Distance(transform.position, target) < 2)
@@ -135,7 +103,7 @@ public class AgentOliviaScript : MonoBehaviour
 		}
     }
 
-    private void Patroling_v2()
+    private void Patroling_v2()    // Rastgele lokasyon belirleyerek patrolling yapma
     {
         // Debug.Log("Agent Konum : " + transform.position + "Target Konum : " + walkPoint);
         if (!walkPointSet) 
@@ -160,8 +128,6 @@ public class AgentOliviaScript : MonoBehaviour
 		}
     }
 
-   
-    // References Functions
 	void UpdateDestination()
 	{
         
@@ -179,7 +145,6 @@ public class AgentOliviaScript : MonoBehaviour
 			waypointlndex = 0;
 		}
 	}
-
 
     private void SearchWalkPoint()
     {
@@ -218,52 +183,7 @@ public class AgentOliviaScript : MonoBehaviour
         //GameOverUI.SetActive(true);
         // GameOverUI.enabled = true;
         //GameOverScreen.Setup(maxTime);
-
     }
-
-    private void AttackPlayer()
-    {
-        //Make sure enemy doesn't move
-        agent.SetDestination(transform.position);
-
-        transform.LookAt(player);
-
-        if (!alreadyAttacked)
-        {
-            ///Attack code here
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
-            ///End of attack code
-
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
-    }
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
-    }
-
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
-    }
-    private void DestroyEnemy()
-    {
-        Destroy(gameObject);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, bustedRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, sightRange);
-    }
-
 
     private void PlayerDetection()
 	{
