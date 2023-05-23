@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using LastHand;
 using UnityEngine;
 using UnityEngine.UI;
-using Event = LastHand.Event;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private CanvasGroup mainPanel;
     [SerializeField] private CanvasGroup minimapPanel;
-    
     [SerializeField] private CanvasGroup alertPanel;
-    [SerializeField] private Text alertText;
-
     [SerializeField] private CanvasGroup puzzlePanel;
-    [SerializeField] private Button puzzleBackButton;
-    
     [SerializeField] private CanvasGroup cranePanel;
+    
+    [SerializeField] private Text alertText;
+    
+    [SerializeField] private Button puzzleBackButton;
     [SerializeField] private Button craneBackButton;
     
     private void OnEnable()
@@ -50,6 +49,7 @@ public class UIManager : MonoBehaviour
     {
         DeActivatePanel(puzzlePanel);
         ActivatePanel(minimapPanel);
+        ActivatePanel(mainPanel);
         ActivatePanel(alertPanel);
         alertText.text = AlertUITexts.HIDE_AGENTS;
     }

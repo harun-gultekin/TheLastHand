@@ -347,6 +347,7 @@ public class PlayerController : MonoBehaviour
             
             if (LevelStateManager.Instance.currentState == LevelState.Started)
             {
+                collision.enabled = false;
                 //TODO start ise belli sure sonra collider ac tekrar
             }
             else
