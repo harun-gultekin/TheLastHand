@@ -77,17 +77,20 @@ public class CraneController : MonoBehaviour
 
    private void MoveCrane(CraneDirection direction)
    {
-      if (direction == CraneDirection.Up || direction == CraneDirection.Down)
+      switch (direction)
       {
-         Debug.Log("up down");
-      }
-      else if (direction == CraneDirection.Left || direction == CraneDirection.Right)
-      {
-         Debug.Log("left right");
-      }
-      else if (direction == CraneDirection.Forward || direction == CraneDirection.Back)
-      {
-         Debug.Log("forward back");
+         case CraneDirection.Up:
+         case CraneDirection.Down:
+            Debug.Log("up down");
+            break;
+         case CraneDirection.Left:
+         case CraneDirection.Right:
+            Debug.Log("left right");
+            break;
+         case CraneDirection.Forward:
+         case CraneDirection.Back:
+            Debug.Log("forward back");
+            break;
       }
    }
    

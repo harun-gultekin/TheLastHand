@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] private CanvasGroup menuPanel;
     [SerializeField] private CanvasGroup mainPanel;
     [SerializeField] private CanvasGroup minimapPanel;
     [SerializeField] private CanvasGroup alertPanel;
@@ -14,6 +15,7 @@ public class UIManager : MonoBehaviour
     
     [SerializeField] private Text alertText;
     
+    [SerializeField] private Button startGameButton;
     [SerializeField] private Button puzzleBackButton;
     [SerializeField] private Button craneBackButton;
     
@@ -22,6 +24,13 @@ public class UIManager : MonoBehaviour
         Events.GamePlay.OnPuzzleWin += OnPuzzleWin;
         Events.GamePlay.OnMinimapCollider += OnMinimapCollider;
         Events.GamePlay.OnCraneCollider += OnCraneCollider;
+        
+        startGameButton.onClick.AddListener(() =>
+        {
+            Events.Menu.StartGameButton.Call();
+            DeActivatePanel(menuPanel);
+            ActivatePanel(mainPanel);
+        });
         
         puzzleBackButton.onClick.AddListener(() =>
         {
@@ -41,6 +50,7 @@ public class UIManager : MonoBehaviour
         Events.GamePlay.OnMinimapCollider -= OnMinimapCollider;
         Events.GamePlay.OnCraneCollider -= OnCraneCollider;
         
+        startGameButton.onClick.RemoveAllListeners();
         puzzleBackButton.onClick.RemoveAllListeners();
         craneBackButton.onClick.RemoveAllListeners();
     }
@@ -49,7 +59,6 @@ public class UIManager : MonoBehaviour
     {
         DeActivatePanel(puzzlePanel);
         ActivatePanel(minimapPanel);
-        ActivatePanel(mainPanel);
         ActivatePanel(alertPanel);
         alertText.text = AlertUITexts.HIDE_AGENTS;
     }
