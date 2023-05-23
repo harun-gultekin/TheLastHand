@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject puzzlePrefab;
     [SerializeField] private GameObject cranePrefab;
     [SerializeField] private GameObject craneCamera;
-    //[SerializeField] private GameObject craneLimits;
-    
     private void OnEnable()
     {
         Events.GamePlay.OnMinimapCollider += OnMinimapCollider;
@@ -38,7 +36,6 @@ public class GameManager : MonoBehaviour
     
     private void OnCraneCollider()
     {
-        //craneLimits.SetActive(true);
         craneCamera.SetActive(true);
         cranePrefab.SetActive(true);
         cranePrefab.GetComponent<CraneController>().enabled = true;
