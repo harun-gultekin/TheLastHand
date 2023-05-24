@@ -12,7 +12,7 @@ public class CraneController : MonoBehaviour
    private float _verticalSpeed;
    private float _horizontalSpeed;
    private float _forwardSpeed;
-
+   
    public void MoveUp()
    {
       _verticalSpeed = 1f;
