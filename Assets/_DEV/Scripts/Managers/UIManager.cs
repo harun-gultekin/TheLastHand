@@ -9,7 +9,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CanvasGroup menuPanel;
     [SerializeField] private CanvasGroup mainPanel;
     [SerializeField] private CanvasGroup minimapPanel;
-    [SerializeField] private CanvasGroup alertPanel;
     [SerializeField] private CanvasGroup puzzlePanel;
     [SerializeField] private CanvasGroup cranePanel;
     
@@ -65,13 +64,15 @@ public class UIManager : MonoBehaviour
     private void OnPuzzleWin()
     {
         DeActivatePanel(puzzlePanel);
+        ActivatePanel(mainPanel);
         ActivatePanel(minimapPanel);
-        ActivatePanel(alertPanel);
         alertText.text = AlertUITexts.HIDE_AGENTS;
     }
     
     private void OnMinimapCollider()
     {
+        alertText.text = AlertUITexts.GET_MINIMAP;
+
         ActivatePanel(puzzlePanel);
         DeActivatePanel(mainPanel);
     }

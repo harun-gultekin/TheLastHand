@@ -830,6 +830,25 @@ Transform:
   m_Father: {fileID: 404015209}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &68285290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8115317514084206980, guid: f42cf6b79b71b43c79cc29b2e5803993, type: 3}
+  m_PrefabInstance: {fileID: 1871245545}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &68285294
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68285290}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3398933304518699759, guid: f42cf6b79b71b43c79cc29b2e5803993, type: 3}
 --- !u!1 &76669919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,7 +1409,6 @@ MonoBehaviour:
   menuPanel: {fileID: 109168006}
   mainPanel: {fileID: 1363230026}
   minimapPanel: {fileID: 1236519980}
-  alertPanel: {fileID: 448757674}
   puzzlePanel: {fileID: 1983826709}
   cranePanel: {fileID: 1598669518}
   alertText: {fileID: 735972549}
@@ -4703,7 +4721,7 @@ GameObject:
   - component: {fileID: 417246391}
   m_Layer: 0
   m_Name: 3-Door Control Panel
-  m_TagString: Minimap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4936,7 +4954,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 448757673}
-  - component: {fileID: 448757674}
   m_Layer: 5
   m_Name: AlertPanel
   m_TagString: Untagged
@@ -4965,18 +4982,6 @@ RectTransform:
   m_AnchoredPosition: {x: -16.169434, y: -197.5755}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!225 &448757674
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448757672}
-  m_Enabled: 1
-  m_Alpha: 0
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &460791354
 GameObject:
   m_ObjectHideFlags: 0
@@ -7229,7 +7234,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Use boxes and drawers to hide from agents!
+  m_Text: Solve the puzzle to get the minimap!
 --- !u!222 &735972550
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8145,6 +8150,25 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6661919070319220254, guid: ae0737587bbbea0a18dfd6d209592c8b, type: 3}
   m_PrefabInstance: {fileID: 684262392}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &823805527 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7891743169333734790, guid: f42cf6b79b71b43c79cc29b2e5803993, type: 3}
+  m_PrefabInstance: {fileID: 1871245545}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &823805531
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823805527}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8915551755068727291, guid: f42cf6b79b71b43c79cc29b2e5803993, type: 3}
 --- !u!1 &825177982
 GameObject:
   m_ObjectHideFlags: 0
@@ -8797,7 +8821,7 @@ GameObject:
   - component: {fileID: 945267632}
   - component: {fileID: 945267631}
   m_Layer: 0
-  m_Name: Fon
+  m_Name: FonSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10126,7 +10150,7 @@ GameObject:
   - component: {fileID: 1093713428}
   m_Layer: 0
   m_Name: 6-Turn On the Press Machine
-  m_TagString: Minimap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11330,7 +11354,7 @@ GameObject:
   - component: {fileID: 1286509948}
   m_Layer: 0
   m_Name: 4-System Control Panel
-  m_TagString: Minimap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16363,7 +16387,7 @@ GameObject:
   - component: {fileID: 1926052137}
   m_Layer: 0
   m_Name: 5-Open the Ventilation
-  m_TagString: Minimap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
