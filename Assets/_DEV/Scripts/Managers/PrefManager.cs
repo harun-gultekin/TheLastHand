@@ -9,9 +9,10 @@ public class PrefManager : MonoBehaviour
     {
         Instance = this;
     }
+    
     public LevelState GetLevelState()
     {
-        var levelState = PlayerPrefs.GetString("CurrentLevelState", LevelState.Started.ToString());
+        var levelState = PlayerPrefs.GetString("CurrentLevelState", LevelState.OnMenu.ToString());
         Enum.TryParse(levelState, out LevelState result);
         return result;
         

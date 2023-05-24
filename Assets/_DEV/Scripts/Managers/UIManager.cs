@@ -36,12 +36,18 @@ public class UIManager : MonoBehaviour
         {
             Events.UIGamePlay.OnPuzzleClose.Call();
             DeActivatePanel(puzzlePanel);
+            
+            LevelStateManager.Instance.isMinimapPuzzleActive = false;
         });
         
         craneBackButton.onClick.AddListener(() =>
         {
+            Events.UIGamePlay.OnCraneClose.Call();
+
             DeActivatePanel(cranePanel);
             ActivatePanel(mainPanel);
+
+            LevelStateManager.Instance.isCraneActive = false;
         });
     }
     
@@ -67,6 +73,7 @@ public class UIManager : MonoBehaviour
     private void OnMinimapCollider()
     {
         ActivatePanel(puzzlePanel);
+        DeActivatePanel(mainPanel);
     }
 
     private void OnCraneCollider()

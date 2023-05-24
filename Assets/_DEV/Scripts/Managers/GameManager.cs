@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject puzzlePrefab;
     [SerializeField] private GameObject cranePrefab;
+    [SerializeField] private GameObject steamPrefab;
 
     //Minimap alana kadar countdown yok
     //countdown icerideki pc (door control panel) ile baslar 
@@ -20,16 +21,22 @@ public class GameManager : MonoBehaviour
     {
         Events.GamePlay.OnMinimapCollider += OnMinimapCollider;
         Events.GamePlay.OnPuzzleWin += OnPuzzleWin;
+        Events.GamePlay.OnSteamDischarged += OnSteamDischarged;
+        Events.GamePlay.OnDoorControlled += OnDoorControlled;
         Events.GamePlay.OnCraneCollider += OnCraneCollider;
         Events.UIGamePlay.OnPuzzleClose += OnPuzzleClose;
+        Events.UIGamePlay.OnCraneClose += OnCraneClose;
     }
     
     private void OnDisable()
     {
         Events.GamePlay.OnMinimapCollider -= OnMinimapCollider;
         Events.GamePlay.OnPuzzleWin -= OnPuzzleWin;
+        Events.GamePlay.OnSteamDischarged -= OnSteamDischarged;
+        Events.GamePlay.OnDoorControlled -= OnDoorControlled;
         Events.GamePlay.OnCraneCollider -= OnCraneCollider;
         Events.UIGamePlay.OnPuzzleClose -= OnPuzzleClose;
+        Events.UIGamePlay.OnCraneClose -= OnCraneClose;
     }
     
     private void OnMinimapCollider()
@@ -42,13 +49,28 @@ public class GameManager : MonoBehaviour
         puzzlePrefab.SetActive(false);
     }
     
+    private void OnSteamDischarged()
+    {
+        steamPrefab.SetActive(true);
+    }
+    
+    private void OnDoorControlled()
+    {
+        steamPrefab.SetActive(false);
+    }
+
+    private void OnPuzzleClose()
+    {
+        puzzlePrefab.SetActive(false);
+    }
+    
     private void OnCraneCollider()
     {
         cranePrefab.SetActive(true);
     }
     
-    private void OnPuzzleClose()
+    private void OnCraneClose()
     {
-        puzzlePrefab.SetActive(false);
+        cranePrefab.SetActive(false);
     }
 }

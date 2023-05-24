@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using LastHand;
 
@@ -18,11 +17,18 @@ public class PlayerController : MonoBehaviour
     public bool falling;
     public int jumpHeight = 150;
     private float _keepY;
-    enum JumpState    {Ground, JumpPrepare, Jumping, Landing}
-    JumpState _jState = JumpState.Ground;
 
-    enum HideState    {Ground, JumpPrepare, Jumping, HoldDrawer, Landing}
+    enum JumpState
+    {
+        Ground, JumpPrepare, Jumping, Landing
+    }
+    JumpState _jState = JumpState.Ground;
+    enum HideState
+    {
+        Ground, JumpPrepare, Jumping, HoldDrawer, Landing
+    }
     HideState _hState = HideState.Ground;
+    
     public bool hidingDrawer = false;
     private bool hideCapability = false;
     private GameObject holdPoint;
@@ -30,11 +36,8 @@ public class PlayerController : MonoBehaviour
     private GameObject hidingTrigger;
     private GameObject closeDrawer;
     public bool hidingStatus = false;
-
     private float distHoldPoint;
-    
     public Transform cameraTransform;
-
     private Coroutine _activateCollider;
 
     void Start()
@@ -46,17 +49,29 @@ public class PlayerController : MonoBehaviour
     
     void LateUpdate()
     {
-        HideCheck();
-        if (!hidingDrawer)
+        if (LevelStateManager.Instance)
         {
-            GroundCheck();
-            Jump();
-            Move();
-            Rotate();
-        }
-        else
-        {
-            HideDrawer();
+            if (LevelStateManager.Instance.currentState != LevelState.OnMenu)
+            {
+                if (!LevelStateManager.Instance.isCraneActive)
+                {
+                    if (!LevelStateManager.Instance.isMinimapPuzzleActive)
+                    {
+                        HideCheck();
+                        if (!hidingDrawer)
+                        {
+                            GroundCheck();
+                            Jump();
+                            Move();
+                            Rotate();
+                        }
+                        else
+                        {
+                            HideDrawer();
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -348,21 +363,11 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Minimap"))
         {
             Events.GamePlay.OnMinimapCollider.Call();
+            collision.enabled = false;
             
-            if (LevelStateManager.Instance.currentState == LevelState.Started)
+            if (LevelStateManager.Instance.currentState != LevelState.MinimapTaken)
             {
-                collision.enabled = false;
-
-                if (_activateCollider != null)
-                {
-                    StopCoroutine(_activateCollider);
-                }
-                
-                _activateCollider = StartCoroutine(ActivateCollider(collision));
-            }
-            else
-            {
-                collision.enabled = false;
+               StartCoroutine(ActivateCollider(collision));
             }
         }
         
@@ -370,6 +375,8 @@ public class PlayerController : MonoBehaviour
         {
             Events.GamePlay.OnCraneCollider.Call();
             collision.enabled = false;
+            
+            StartCoroutine(ActivateCollider(collision));
         }
         
         if (collision.gameObject.name == "HidingTrigger")
@@ -377,6 +384,11 @@ public class PlayerController : MonoBehaviour
             hidingTrigger = collision.gameObject;
             hideCapability = true;
             holdPoint = collision.gameObject.transform.GetChild(0).gameObject;
+        }
+        
+        if (collision.gameObject.name == "Steam")
+        {
+            Events.GamePlay.OnSteamDischarged.Call();
         }
     }
 
@@ -390,7 +402,7 @@ public class PlayerController : MonoBehaviour
     
     IEnumerator ActivateCollider(Collider collision)
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
         collision.enabled = true;
     }
     

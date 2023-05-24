@@ -12,21 +12,28 @@ public class CameraManager : MonoBehaviour
     private float rotY = 0.0f;
     private float rotX = 0.0f;
 
-    private bool rightclicked = false;
-
     void Start()
     {
         Vector3 rot = transform.localRotation.eulerAngles;
         rotY = rot.y;
         rotX = rot.x;
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
     }
 
     void Update()
     {
-        RotationActivationCheck();
-        /*if (rightclicked)*/RotateCamera();
+        if (LevelStateManager.Instance)
+        {
+            if (LevelStateManager.Instance.currentState != LevelState.OnMenu)
+            {
+                if (!LevelStateManager.Instance.isCraneActive)
+                {
+                    if (!LevelStateManager.Instance.isMinimapPuzzleActive)
+                    {
+                        RotateCamera();
+                    } 
+                }
+            }
+        }
     }
 
     void LateUpdate()
@@ -40,18 +47,6 @@ public class CameraManager : MonoBehaviour
 
         float step = CameraMoveSpeed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, target.position, step);
-    }
-
-    private void RotationActivationCheck()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            rightclicked = true;
-        }
-        if (Input.GetMouseButtonUp(1))
-        {
-            rightclicked = false;
-        }
     }
 
     private void RotateCamera()
