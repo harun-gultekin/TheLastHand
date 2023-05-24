@@ -1,106 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CraneController : MonoBehaviour
 {
-   public float speed = 5f;
-   
-   [SerializeField] private Button moveUpButton;
-   [SerializeField] private Button moveDownButton;
-   [SerializeField] private Button moveRightButton;
-   [SerializeField] private Button moveLeftButton;
-   [SerializeField] private Button moveForwardButton;
-   [SerializeField] private Button moveBackButton;
-   
-   private void OnEnable()
-   {
-      moveUpButton.onClick.AddListener(() =>
-      { 
-         MoveCrane(CraneDirection.Up);
-      });
-      moveDownButton.onClick.AddListener(() =>
-      {
-         MoveCrane(CraneDirection.Down);
-      });
-      moveRightButton.onClick.AddListener(() =>
-      {
-         MoveCrane(CraneDirection.Right);
-      });
-      moveLeftButton.onClick.AddListener(() =>
-      {
-         MoveCrane(CraneDirection.Left);
-      });
-      moveForwardButton.onClick.AddListener(() =>
-      {
-         MoveCrane(CraneDirection.Forward);
-      });
-      moveBackButton.onClick.AddListener(() =>
-      { 
-         MoveCrane(CraneDirection.Back);
-      });
-   }
-    
-   private void OnDisable()
-   {
-      moveUpButton.onClick.RemoveAllListeners();
-      moveDownButton.onClick.RemoveAllListeners();
-      moveRightButton.onClick.RemoveAllListeners();
-      moveLeftButton.onClick.RemoveAllListeners();
-      moveForwardButton.onClick.RemoveAllListeners();
-      moveBackButton.onClick.RemoveAllListeners();
-   }
-   
+   [SerializeField] private GameObject verticalMoveObject;
+   [SerializeField] private GameObject horizontalMoveObject;
+   [SerializeField] private GameObject leftRightMoveObject;
+
+   [SerializeField] private float speed = 5f;
+   private float _verticalSpeed;
+
    void Update()
+   {
+      //float horizontalInput = Input.GetAxis("Horizontal");
+      //float verticalInput = Input.GetAxis("Vertical");
+
+      //Vector3 movement = new Vector3(horizontalInput, _verticalSpeed, verticalInput);
+      //movement.Normalize();  
+      //transform.Translate(movement * speed * Time.deltaTime);
+   }
+
+   public void MoveUp()
+   {
+      _verticalSpeed = 1f;
+      Vector3 movementDown = new Vector3(transform.position.x, _verticalSpeed, transform.position.z);
+      movementDown.Normalize();
+      transform.Translate(movementDown * speed * Time.deltaTime);
+   }
+
+   public void MoveDown()
+   {
+      _verticalSpeed = -1f;
+      Vector3 movementDown = new Vector3(transform.position.x, _verticalSpeed, transform.position.z);
+      movementDown.Normalize();
+      transform.Translate(movementDown * speed * Time.deltaTime);
+   }
+   
+   public void MoveRight()
    {
       float horizontalInput = Input.GetAxis("Horizontal");
       float verticalInput = Input.GetAxis("Vertical");
-      
-      float verticalSpeed = 0f;
 
-      if (Input.GetKey(KeyCode.LeftShift))
-      {
-         verticalSpeed = -1f;  
-      }
-        
-      else if (Input.GetKey(KeyCode.LeftControl))
-      {
-         verticalSpeed = 1f;   
-      }
-      
-      Vector3 movement = new Vector3(horizontalInput, verticalSpeed, verticalInput);
+      Vector3 movement = new Vector3(horizontalInput, transform.position.y, verticalInput);
       movement.Normalize();  
-
       transform.Translate(movement * speed * Time.deltaTime);
    }
-
-   private void MoveCrane(CraneDirection direction)
+   
+   public void MoveLeft()
    {
-      switch (direction)
-      {
-         case CraneDirection.Up:
-         case CraneDirection.Down:
-            Debug.Log("up down");
-            break;
-         case CraneDirection.Left:
-         case CraneDirection.Right:
-            Debug.Log("left right");
-            break;
-         case CraneDirection.Forward:
-         case CraneDirection.Back:
-            Debug.Log("forward back");
-            break;
-      }
+     
    }
    
-   private enum CraneDirection 
+   public void MoveForward()
    {
-      Up,
-      Down,
-      Right,
-      Left,
-      Forward,
-      Back
+     
+   }
+   
+   public void MoveBack()
+   {
+     
    }
 }

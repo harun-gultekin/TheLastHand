@@ -38,4 +38,8 @@ public enum LevelState
 {
     Started,
     MinimapTaken,
+    SteamDischarged,
+    DoorControlled,
+    VentilationOpened,
+    PressMachineOpened
 }

@@ -7,7 +7,15 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject puzzlePrefab;
     [SerializeField] private GameObject cranePrefab;
-    [SerializeField] private GameObject craneCamera;
+
+    //Minimap alana kadar countdown yok
+    //countdown icerideki pc (door control panel) ile baslar 
+    //Puzzle cozunce kapilar blocklanir, agents kapıyı acamaz 
+    //O arada ventilatordan kacar countdown baslar
+    
+    //Sis icin de countdown olabilir sis kalma suresi olur
+    //Agent dolanirken sis basilir 
+
     private void OnEnable()
     {
         Events.GamePlay.OnMinimapCollider += OnMinimapCollider;
@@ -36,9 +44,7 @@ public class GameManager : MonoBehaviour
     
     private void OnCraneCollider()
     {
-        craneCamera.SetActive(true);
         cranePrefab.SetActive(true);
-        cranePrefab.GetComponent<CraneController>().enabled = true;
     }
     
     private void OnPuzzleClose()

@@ -41,6 +41,7 @@ public class UIManager : MonoBehaviour
         craneBackButton.onClick.AddListener(() =>
         {
             DeActivatePanel(cranePanel);
+            ActivatePanel(mainPanel);
         });
     }
     
@@ -71,6 +72,7 @@ public class UIManager : MonoBehaviour
     private void OnCraneCollider()
     {
         ActivatePanel(cranePanel);
+        DeActivatePanel(mainPanel);
     }
     
     private void ActivatePanel(CanvasGroup panel)
