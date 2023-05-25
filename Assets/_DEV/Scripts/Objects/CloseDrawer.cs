@@ -57,6 +57,8 @@ public class CloseDrawer : MonoBehaviour
             collision.gameObject.GetComponent<PlayerController>().hidingStatus = true;
             b_move = true;
             
+            UIManager.Instance.alertText.text = AlertUITexts.TURN_VALVE;
+
             Events.GamePlay.OnDrawerTrigger.Call();
         }
     }

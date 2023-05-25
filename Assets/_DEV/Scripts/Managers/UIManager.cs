@@ -6,17 +6,24 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
+    
     [SerializeField] private CanvasGroup menuPanel;
     [SerializeField] private CanvasGroup mainPanel;
     [SerializeField] private CanvasGroup minimapPanel;
     [SerializeField] private CanvasGroup puzzlePanel;
     [SerializeField] private CanvasGroup cranePanel;
     
-    [SerializeField] private Text alertText;
+    public Text alertText;
     
     [SerializeField] private Button startGameButton;
     [SerializeField] private Button puzzleBackButton;
     [SerializeField] private Button craneBackButton;
+    
+    private void Awake()
+    {
+        Instance = this;
+    }
     
     private void OnEnable()
     {

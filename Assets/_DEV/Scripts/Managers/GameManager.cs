@@ -7,23 +7,11 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject puzzlePrefab;
     [SerializeField] private GameObject cranePrefab;
-    [SerializeField] private GameObject steamPrefab;
-    [SerializeField] private ParticleSystem steamParticle;
-
-    //Minimap alana kadar countdown yok
-    //countdown icerideki pc (door control panel) ile baslar 
-    //Puzzle cozunce kapilar blocklanir, agents kapıyı acamaz 
-    //O arada ventilatordan kacar countdown baslar
-    
-    //Sis icin de countdown olabilir sis kalma suresi olur
-    //Agent dolanirken sis basilir 
 
     private void OnEnable()
     {
         Events.GamePlay.OnMinimapCollider += OnMinimapCollider;
         Events.GamePlay.OnPuzzleWin += OnPuzzleWin;
-        Events.GamePlay.OnSteamDischarged += OnSteamDischarged;
-        Events.GamePlay.OnDoorControlled += OnDoorControlled;
         Events.GamePlay.OnCraneCollider += OnCraneCollider;
         Events.UIGamePlay.OnPuzzleClose += OnPuzzleClose;
         Events.UIGamePlay.OnCraneClose += OnCraneClose;
@@ -33,8 +21,6 @@ public class GameManager : MonoBehaviour
     {
         Events.GamePlay.OnMinimapCollider -= OnMinimapCollider;
         Events.GamePlay.OnPuzzleWin -= OnPuzzleWin;
-        Events.GamePlay.OnSteamDischarged -= OnSteamDischarged;
-        Events.GamePlay.OnDoorControlled -= OnDoorControlled;
         Events.GamePlay.OnCraneCollider -= OnCraneCollider;
         Events.UIGamePlay.OnPuzzleClose -= OnPuzzleClose;
         Events.UIGamePlay.OnCraneClose -= OnCraneClose;
@@ -50,18 +36,6 @@ public class GameManager : MonoBehaviour
         puzzlePrefab.SetActive(false);
     }
     
-    private void OnSteamDischarged()
-    {
-        Debug.Log("steam");
-        steamPrefab.SetActive(true);
-        steamParticle.Play();
-    }
-    
-    private void OnDoorControlled()
-    {
-        steamPrefab.SetActive(false);
-    }
-
     private void OnPuzzleClose()
     {
         puzzlePrefab.SetActive(false);

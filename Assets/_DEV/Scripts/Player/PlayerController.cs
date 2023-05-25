@@ -396,6 +396,9 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.name == "Steam")
         {
             Events.GamePlay.OnSteamDischarged.Call();
+
+            Debug.Log("steam");
+            UIManager.Instance.alertText.text = AlertUITexts.TURN_VALVE;
         }
     }
 
