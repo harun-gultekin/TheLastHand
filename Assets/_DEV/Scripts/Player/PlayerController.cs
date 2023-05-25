@@ -53,23 +53,17 @@ public class PlayerController : MonoBehaviour
         {
             if (LevelStateManager.Instance.currentState != LevelState.OnMenu)
             {
-                if (!LevelStateManager.Instance.isCraneActive)
+                HideCheck();
+                if (!hidingDrawer)
                 {
-                    if (!LevelStateManager.Instance.isMinimapPuzzleActive)
-                    {
-                        HideCheck();
-                        if (!hidingDrawer)
-                        {
-                            GroundCheck();
-                            Jump();
-                            Move();
-                            Rotate();
-                        }
-                        else
-                        {
-                            HideDrawer();
-                        }
-                    }
+                    GroundCheck();
+                    Jump();
+                    Move();
+                    Rotate();
+                }
+                else
+                {
+                    HideDrawer();
                 }
             }
         }
@@ -205,8 +199,16 @@ public class PlayerController : MonoBehaviour
     #region Movement
     private void Move()
     {
-        movementVerticalInput = Input.GetAxis("Vertical");
-        movementHorizontalInput = Input.GetAxis("Horizontal");
+        if (!LevelStateManager.Instance.isMinimapPuzzleActive)
+        {
+            movementVerticalInput = Input.GetAxis("Vertical");
+            movementHorizontalInput = Input.GetAxis("Horizontal");
+        }
+        else
+        {
+            movementVerticalInput = 0;
+            movementHorizontalInput = 0;
+        }
 
         Vector3 movePosition = Vector3.zero;
         movePosition += cameraTransform.forward * movementVerticalInput * movementSpeed * Time.deltaTime;
@@ -229,7 +231,14 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        movementJumpInput = Input.GetAxis("Jump");
+        if (!LevelStateManager.Instance.isMinimapPuzzleActive)
+        {
+            movementJumpInput = Input.GetAxis("Jump");
+        }
+        else
+        {
+            movementJumpInput = 0;
+        }
         switch(_jState)
         {
             case JumpState.Ground:
