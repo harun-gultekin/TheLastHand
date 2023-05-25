@@ -17,6 +17,8 @@ namespace LastHand
             public static Event OnDrawerTrigger = new Event(nameof(OnDrawerTrigger));
             public static Event OnDrawerExit = new Event(nameof(OnDrawerExit));
 
+            public static Event OnCountdownCompleted = new Event(nameof(OnCountdownCompleted));
+
             public static Event OnAgentDetected = new Event(nameof(OnAgentDetected));
         }
     }
