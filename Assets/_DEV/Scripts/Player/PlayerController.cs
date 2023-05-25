@@ -73,7 +73,6 @@ public class PlayerController : MonoBehaviour
     {
         Events.GamePlay.OnMinimapCollider += OnMinimapCollider;
         Events.GamePlay.OnPuzzleWin += OnPuzzleWin;
-        
         Events.UIGamePlay.OnPuzzleClose += OnPuzzleClose;
     }
     
@@ -81,7 +80,6 @@ public class PlayerController : MonoBehaviour
     {
         Events.GamePlay.OnMinimapCollider -= OnMinimapCollider;
         Events.GamePlay.OnPuzzleWin -= OnPuzzleWin;
-        
         Events.UIGamePlay.OnPuzzleClose -= OnPuzzleClose;
     }
 
