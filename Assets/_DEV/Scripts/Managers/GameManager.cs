@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     
     private void OnSteamDischarged()
     {
+        Debug.Log("steam");
         steamPrefab.SetActive(true);
         steamParticle.Play();
     }

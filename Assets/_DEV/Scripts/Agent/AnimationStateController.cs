@@ -9,9 +9,6 @@ public class AnimationStateController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        //PatrollingState = "Patrolling";
-
-        //Debug.Log(animator);
     }
 
     void Update()
@@ -36,18 +33,5 @@ public class AnimationStateController : MonoBehaviour
             animator.SetBool("isWalking",false);
             animator.SetBool("isBusted",true);
         }
-
-
-        /*
-            if(Input.GetKeyDown("w"))
-            {
-                animator.SetBool("isWalking",true);
-            }
-
-            if(Input.GetKeyUp("w"))
-            {
-                animator.SetBool("isWalking",false);
-            }
-        */
     }
 }

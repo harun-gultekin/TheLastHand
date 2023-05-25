@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AlarmBarLevel : MonoBehaviour
 {
-    // Start is called before the first frame update
     public AgentOliviaScript theAgentOliviaScript;
     public AgentAlexNavMesh theAgentAlexNavMesh;
     private float alarmBarLevelx;
@@ -13,16 +12,8 @@ public class AlarmBarLevel : MonoBehaviour
     void Start()
     {    
         alarmBarLevelx = 0;
-        /*
-            // !=  --> xor şeklinde çalışır
-            if       ((theAgentOliviaScript.playerInSightRange != theAgentAlexNavMesh.playerInSightRange) &&  !theAgentOliviaScript.thePlayerInEnemyFOV && !theAgentAlexNavMesh.thePlayerInEnemyFOV )    alarmBarLevelx = 0.20f;
-            else if  ( theAgentOliviaScript.playerInSightRange && theAgentAlexNavMesh.playerInSightRange  &&  !theAgentOliviaScript.thePlayerInEnemyFOV && !theAgentAlexNavMesh.thePlayerInEnemyFOV )     alarmBarLevelx = 0.40f;
-            else if  ( theAgentOliviaScript.playerInSightRange && theAgentAlexNavMesh.playerInSightRange  && (!theAgentOliviaScript.thePlayerInEnemyFOV != !theAgentAlexNavMesh.thePlayerInEnemyFOV))     alarmBarLevelx = 0.40f;
-            else if  ( theAgentOliviaScript.playerInSightRange && theAgentAlexNavMesh.playerInSightRange  &&  !theAgentOliviaScript.thePlayerInEnemyFOV && !theAgentAlexNavMesh.thePlayerInEnemyFOV )     alarmBarLevelx = 0.40f;
-        */
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if       ( !theAgentOliviaScript.thePlayerInEnemyFOV &&  !theAgentAlexNavMesh.thePlayerInEnemyFOV  &&  !theAgentOliviaScript.playerInSightRange &&  !theAgentAlexNavMesh.playerInSightRange )     alarmBarLevelx = 0.00f;
@@ -49,5 +40,4 @@ public class AlarmBarLevel : MonoBehaviour
 
         alarmBarLevel = new Vector3 (alarmBarLevelx, 1, 1);
     }
-
 }

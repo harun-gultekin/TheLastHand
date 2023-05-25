@@ -9,14 +9,10 @@ public class AnimationStateControllerOlivia : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        //PatrollingState = "Patrolling";
-        //Debug.Log(animator);
     }
 
     void Update()
     {
-
-            
         if(theAgentOliviaScript.playerInBustedRange && theAgentOliviaScript.thePlayerInEnemyFOV)
         {
             thePlayerInBustedRange = true;
@@ -37,18 +33,5 @@ public class AnimationStateControllerOlivia : MonoBehaviour
             animator.SetBool("isWalking",false);
             animator.SetBool("isBusted",true);
         }
-
-
-        /*
-            if(Input.GetKeyDown("w"))
-            {
-                animator.SetBool("isWalking",true);
-            }
-
-            if(Input.GetKeyUp("w"))
-            {
-                animator.SetBool("isWalking",false);
-            }
-        */
     }
 }
