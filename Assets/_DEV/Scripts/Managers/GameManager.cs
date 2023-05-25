@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject puzzlePrefab;
     [SerializeField] private GameObject cranePrefab;
     [SerializeField] private GameObject steamPrefab;
+    [SerializeField] private ParticleSystem steamParticle;
 
     //Minimap alana kadar countdown yok
     //countdown icerideki pc (door control panel) ile baslar 
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
     private void OnSteamDischarged()
     {
         steamPrefab.SetActive(true);
+        steamParticle.Play();
     }
     
     private void OnDoorControlled()
