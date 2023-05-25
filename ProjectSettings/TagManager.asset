@@ -9,6 +9,10 @@ TagManager:
   - Crane
   - Box
   - Steam
+  - DoorControl
+  - SystemControl
+  - OpenVentilation
+  - PressMachine
   layers:
   - Default
   - TransparentFX

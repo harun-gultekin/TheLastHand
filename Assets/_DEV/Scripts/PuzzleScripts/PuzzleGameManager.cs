@@ -9,13 +9,9 @@ public class PuzzleGameManager : MonoBehaviour
     private int _totalBlock = 0;
     private int _correctedBlocks = 0;
 
-    public GameObject winText;
-
     void Start()
     {
-        winText.SetActive(false);
         _totalBlock = blockHolder.transform.childCount;
-        //Debug.Log(totalBlock);
         blocks = new GameObject[_totalBlock];
 
         for (int i = 0; i < blocks.Length; i++)
@@ -31,7 +27,6 @@ public class PuzzleGameManager : MonoBehaviour
         if(_correctedBlocks == _totalBlock)
         {
             Events.GamePlay.OnPuzzleWin.Call();
-            winText.SetActive(true);
         }
     }
 
