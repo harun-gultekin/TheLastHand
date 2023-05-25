@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using LastHand;
 using UnityEngine;
 
 public class CloseDrawer : MonoBehaviour
@@ -8,7 +9,7 @@ public class CloseDrawer : MonoBehaviour
     private bool b_move = false;
     private bool close = false;
     private bool open = false;
-
+    
     void Start()
     {
         close = true;
@@ -55,6 +56,8 @@ public class CloseDrawer : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerController>().hidingStatus = true;
             b_move = true;
+            
+            Events.GamePlay.OnDrawerTrigger.Call();
         }
     }
 
@@ -64,6 +67,8 @@ public class CloseDrawer : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerController>().hidingStatus = false;
             b_move = false;
+            
+            Events.GamePlay.OnDrawerExit.Call();
         }
     }
 }

@@ -23,7 +23,9 @@ public class UIManager : MonoBehaviour
         Events.GamePlay.OnPuzzleWin += OnPuzzleWin;
         Events.GamePlay.OnMinimapCollider += OnMinimapCollider;
         Events.GamePlay.OnCraneCollider += OnCraneCollider;
-        
+        Events.GamePlay.OnDrawerTrigger += OnDrawerTrigger;
+        Events.GamePlay.OnDrawerExit += OnDrawerExit;
+
         startGameButton.onClick.AddListener(() =>
         {
             Events.Menu.StartGameButton.Call();
@@ -55,6 +57,8 @@ public class UIManager : MonoBehaviour
         Events.GamePlay.OnPuzzleWin -= OnPuzzleWin;
         Events.GamePlay.OnMinimapCollider -= OnMinimapCollider;
         Events.GamePlay.OnCraneCollider -= OnCraneCollider;
+        Events.GamePlay.OnDrawerTrigger -= OnDrawerTrigger;
+        Events.GamePlay.OnDrawerExit -= OnDrawerExit;
         
         startGameButton.onClick.RemoveAllListeners();
         puzzleBackButton.onClick.RemoveAllListeners();
@@ -81,6 +85,16 @@ public class UIManager : MonoBehaviour
     {
         ActivatePanel(cranePanel);
         DeActivatePanel(mainPanel);
+    }
+    
+    private void OnDrawerTrigger()
+    {
+        alertText.text = AlertUITexts.USE_DRAWER;
+    }
+    
+    private void OnDrawerExit()
+    {
+        alertText.text = AlertUITexts.CLOSE_DRAWER;
     }
     
     private void ActivatePanel(CanvasGroup panel)
