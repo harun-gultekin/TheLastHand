@@ -54,7 +54,7 @@ public class CameraManager : MonoBehaviour
         mouseX = Input.GetAxis("Mouse X");
         mouseY = Input.GetAxis("Mouse Y");
         rotY += mouseX * inputSensitivity * Time.deltaTime;
-        rotX += mouseY * inputSensitivity * Time.deltaTime;
+        rotX -= mouseY * inputSensitivity * Time.deltaTime;
 
         rotX = Mathf.Clamp(rotX, minimumPivotAngle, maximumPivotAngle);
         Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
