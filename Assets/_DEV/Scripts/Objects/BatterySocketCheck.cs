@@ -27,9 +27,11 @@ public class BatterySocketCheck : MonoBehaviour
                 return false;
             }
         }
-
-        Debug.Log("Batteries Plugged");
-        PressMachineManager.Instance.triggerActive = true;
+        
+        if (transform.gameObject.name == "PressMachineBattery")
+        {
+            PressMachineManager.Instance.triggerActive = true;
+        }
         return true;
     }
 }
