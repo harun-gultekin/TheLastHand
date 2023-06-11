@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using LastHand;
+using Event = LastHand.Event;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public bool falling;
     public int jumpHeight = 150;
     private float _keepY;
+
+    [SerializeField] private ParticleSystem steamParticle;
 
     enum JumpState
     {
@@ -182,6 +185,10 @@ public class PlayerController : MonoBehaviour
 
             case ValveState.Landing:
             {
+                steamParticle.gameObject.SetActive(true);
+                steamParticle.Play();
+                Events.GamePlay.OnSteamDischarged.Call();
+                
                 if(enableColliderPoint + 0.2f > transform.position.y)
                 {
                     _selfCollider.enabled = true;
@@ -524,8 +531,7 @@ public class PlayerController : MonoBehaviour
         
         if (collision.gameObject.name == "Steam")
         {
-            Events.GamePlay.OnSteamDischarged.Call();
-
+          
             Debug.Log("steam");
             UIManager.Instance.alertText.text = AlertUITexts.TURN_VALVE;
         }
