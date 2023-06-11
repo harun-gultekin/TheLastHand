@@ -6872,7 +6872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 791236667624993684, guid: 7edb05a8af525d7c9b67ba9aaaa3e2a8, type: 3}
       propertyPath: m_Name
-      value: PressMachinePrefab
+      value: PressMachineBattery
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7edb05a8af525d7c9b67ba9aaaa3e2a8, type: 3}
@@ -14484,7 +14484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8613029030878958455, guid: 402d4e14a175b9c4f9bab4a700d7d14f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.425
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7646739597698752262, guid: 402d4e14a175b9c4f9bab4a700d7d14f, type: 3}
       propertyPath: m_Materials.Array.data[0]
