@@ -188,7 +188,8 @@ public class PlayerController : MonoBehaviour
                 steamParticle.gameObject.SetActive(true);
                 steamParticle.Play();
                 Events.GamePlay.OnSteamDischarged.Call();
-                
+                UIManager.Instance.alertText.text = AlertUITexts.GO_CONTROL;
+
                 if(enableColliderPoint + 0.2f > transform.position.y)
                 {
                     _selfCollider.enabled = true;
