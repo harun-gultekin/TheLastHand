@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CanvasGroup puzzlePanel;
     [SerializeField] private CanvasGroup cranePanel;
     [SerializeField] private CanvasGroup timerPanel;
+    [SerializeField] private CanvasGroup gameOverPanel;
 
     public Text alertText;
     
