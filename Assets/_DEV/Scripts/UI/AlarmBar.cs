@@ -34,6 +34,7 @@ public class AlarmBar : MonoBehaviour
             if (alarmBarLevel.x >= 1)
             {
                 UIManager.Instance.gameOverPanel.gameObject.SetActive(true);
+                LevelStateManager.Instance.currentState = LevelState.OnMenu;
                 alarmBarLevel.x = 1;
             }
             else if(alarmBarLevel.x <= 0) alarmBarLevel.x = 0;
