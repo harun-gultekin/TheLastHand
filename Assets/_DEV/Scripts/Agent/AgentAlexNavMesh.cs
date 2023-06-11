@@ -107,8 +107,6 @@ public class AgentAlexNavMesh : MonoBehaviour
     {
         agent.SetDestination(transform.position);
         transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
-
-        UIManager.Instance.gameOverPanel.gameObject.SetActive(true);
         
         if (!isGameOver)
         {

@@ -22,6 +22,8 @@ public class AlarmBar : MonoBehaviour
     void Update()
     {
         alarmBarLevel = theAlarmBarLevel.alarmBarLevel;
+
+       
         CheckLevelChanges();
     }
     
@@ -29,7 +31,11 @@ public class AlarmBar : MonoBehaviour
     {
         if(alarmBarPrevLevel.x != alarmBarLevel.x)
         {
-            if(alarmBarLevel.x >= 1) alarmBarLevel.x = 1;
+            if (alarmBarLevel.x >= 1)
+            {
+                UIManager.Instance.gameOverPanel.gameObject.SetActive(true);
+                alarmBarLevel.x = 1;
+            }
             else if(alarmBarLevel.x <= 0) alarmBarLevel.x = 0;
             
             if(alarmBarLevel.x <= 0.2f)         ColorUtility.TryParseHtmlString("#ffffff", out alarmBarColor);
