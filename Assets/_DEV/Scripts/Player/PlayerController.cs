@@ -28,6 +28,12 @@ public class PlayerController : MonoBehaviour
         Ground, JumpPrepare, Jumping, HoldDrawer, Landing
     }
     HideState _hState = HideState.Ground;
+
+    enum ValveState
+    {
+        Ground, JumpPrepare, Jumping, RotateValve, Landing
+    }
+    ValveState _vState = ValveState.Ground;
     
     public bool hidingDrawer = false;
     private bool hideCapability = false;
@@ -39,6 +45,9 @@ public class PlayerController : MonoBehaviour
     private float distHoldPoint;
     public Transform cameraTransform;
     private Coroutine _activateCollider;
+
+    public bool steamMove = false;
+    public bool steamTrigger = false;
 
     void Start()
     {
@@ -54,7 +63,8 @@ public class PlayerController : MonoBehaviour
             if (LevelStateManager.Instance.currentState != LevelState.OnMenu)
             {
                 HideCheck();
-                if (!hidingDrawer)
+                steamCheck();
+                if (!hidingDrawer && !steamMove)
                 {
                     GroundCheck();
                     Jump();
@@ -63,7 +73,15 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    HideDrawer();
+                    if (hidingDrawer)
+                    {
+                        HideDrawer();
+                    }
+
+                    if (steamMove)
+                    {
+                        MoveValve();
+                    }
                 }
             }
         }
@@ -83,7 +101,118 @@ public class PlayerController : MonoBehaviour
         Events.UIGamePlay.OnPuzzleClose -= OnPuzzleClose;
     }
 
+    #region Move Valve
+
+    private void MoveValve()
+    {
+        switch(_vState)
+        {
+            case ValveState.Ground:
+            {
+                if (isGrounded && (_playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk") || _playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("IdleJump") || _playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("IdleJump 0")) )
+                {
+                    enableColliderPoint = transform.position.y;
+                    _playerAnimator.SetBool("Jump", true);
+                    _playerAnimator.SetBool("Walk", false);
+                    _playerAnimator.SetBool("JumpRelease", false);
+                    _playerAnimator.SetBool("Land", false);
+                    _playerAnimator.SetBool("Hold", false);
+                    _vState = ValveState.JumpPrepare;
+                }
+
+                break;
+            }
+            case ValveState.JumpPrepare:
+            {
+                if (_playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("JumpPrepare"))
+                {
+                    _playerAnimator.SetBool("Jump", true);
+                    _playerAnimator.SetBool("Walk", false);
+                    _playerAnimator.SetBool("JumpRelease", true);
+                    _playerAnimator.SetBool("Land", false);
+                    _playerAnimator.SetBool("Hold", false);
+                    //movementVerticalInput = Input.GetAxis("Vertical");
+                    //movementHorizontalInput = Input.GetAxis("Horizontal");
+                    distHoldPoint = Vector3.Distance(holdPoint.transform.position, transform.position);
+                    _selfCollider.enabled = false;
+                    _selfRigidbody.useGravity = false;
+                    _vState = ValveState.Jumping;
+                }
+                break;
+            }
+            case ValveState.Jumping:
+            {
+                float step = movementSpeed * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, holdPoint.transform.position, step);
+                if (Vector3.Distance(holdPoint.transform.position, transform.position) < distHoldPoint*0.1f)
+                {
+                    _selfRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+                    _playerAnimator.SetBool("Jump", true);
+                    _playerAnimator.SetBool("Walk", false);
+                    _playerAnimator.SetBool("JumpRelease", true);
+                    _playerAnimator.SetBool("Land", false);
+                    _playerAnimator.SetBool("Hold", true);
+                    _vState = ValveState.RotateValve;
+                }
+                break;
+            }
+            case ValveState.RotateValve:
+            {
+                if (_playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Hold"))
+                {
+                    float step = movementSpeed * Time.deltaTime;
+                    Quaternion target = Quaternion.Euler(270f, 0, 0);
+                    holdPoint.transform.GetChild(0).gameObject.transform.localRotation = Quaternion.Slerp(holdPoint.transform.GetChild(0).gameObject.transform.localRotation, target, step);
+                    if (holdPoint.transform.GetChild(0).gameObject.transform.eulerAngles.x == 270f)
+                    {
+                        _selfRigidbody.constraints = RigidbodyConstraints.None;
+                        _selfRigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+                        _selfRigidbody.useGravity = true;
+                        _playerAnimator.SetBool("Jump", false);
+                        _playerAnimator.SetBool("Walk", false);
+                        _playerAnimator.SetBool("JumpRelease", false);
+                        _playerAnimator.SetBool("Land", true);
+                        _playerAnimator.SetBool("Hold", false);
+                        _vState = ValveState.Landing;
+                    }
+                }
+
+                break;
+            }
+
+            case ValveState.Landing:
+            {
+                if(enableColliderPoint + 0.2f > transform.position.y)
+                {
+                    _selfCollider.enabled = true;
+                }
+                if (_selfCollider.enabled && _playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Land"))
+                {
+                    _playerAnimator.SetBool("Jump", false);
+                    _playerAnimator.SetBool("Walk", false);
+                    _playerAnimator.SetBool("JumpRelease", false);
+                    _playerAnimator.SetBool("Land", false);
+                    jumpAction = false;
+                    _vState = ValveState.Ground;
+                    steamMove = false;
+                }
+                break;
+            }
+        }
+    }
+
+    private void steamCheck()
+    {
+        if (steamTrigger && Input.GetKeyDown(KeyCode.E))
+        {
+            steamMove = true;
+        }
+    }
+
+    #endregion
+
     #region Drawer Hide
+
     private void HideDrawer()
     {
         switch(_hState)
@@ -400,6 +529,12 @@ public class PlayerController : MonoBehaviour
             Debug.Log("steam");
             UIManager.Instance.alertText.text = AlertUITexts.TURN_VALVE;
         }
+
+        if (collision.gameObject.name == "ValveHoldPoint")
+        {
+            holdPoint = collision.gameObject;
+            steamTrigger = true;
+        }
     }
 
     private void OnTriggerExit(Collider collision)
@@ -407,6 +542,11 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.name == "HidingTrigger")
         {
             hideCapability = false;
+        }
+
+        if (collision.gameObject.name == "ValveHoldPoint")
+        {
+            steamTrigger = false;
         }
     }
     
