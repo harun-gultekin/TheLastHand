@@ -9,8 +9,8 @@ public class PressMachineManager : MonoBehaviour
     [SerializeField] private float startPoint = 2.527f;
     [SerializeField] private float endPoint = 0.167f;
     [SerializeField] private float slowness = 3f;
-    private bool animationStarted = false;
-    [SerializeField] public bool triggerActive = false;
+    private bool animationStarted;
+    [SerializeField] public bool triggerActive;
 
     private void Update()
     {
