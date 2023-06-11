@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PressMachineManager : MonoBehaviour
 {
+    public static PressMachineManager Instance;
+    
     [SerializeField] private GameObject moveMesh;
     [SerializeField] private float startPoint = 2.527f;
     [SerializeField] private float endPoint = 0.167f;
@@ -12,6 +14,11 @@ public class PressMachineManager : MonoBehaviour
     private bool animationStarted;
     [SerializeField] public bool triggerActive;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+    
     private void Update()
     {
         if (!animationStarted && triggerActive)

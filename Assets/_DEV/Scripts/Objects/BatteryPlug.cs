@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BatteryPlug : MonoBehaviour
 {
-    private bool b_MoveBattery = false;
-    public bool b_MoveBatteryDone = false;
+    private bool b_MoveBattery;
+    public bool b_MoveBatteryDone;
     private Rigidbody rb;
 
     void Start()
@@ -16,7 +16,6 @@ public class BatteryPlug : MonoBehaviour
             rb.useGravity = false;
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
-
     }
 
     void Update()
@@ -31,11 +30,11 @@ public class BatteryPlug : MonoBehaviour
                 rb.constraints = RigidbodyConstraints.FreezeAll;
                 b_MoveBatteryDone = true;
             }
-        if (b_MoveBatteryDone)
-        {
-            rb.constraints = RigidbodyConstraints.FreezeAll;
-            transform.localPosition = new Vector3(0,0,0);
-        }
+            if (b_MoveBatteryDone)
+            {
+                rb.constraints = RigidbodyConstraints.FreezeAll;
+                transform.localPosition = new Vector3(0,0,0);
+            }
         }
     }
 

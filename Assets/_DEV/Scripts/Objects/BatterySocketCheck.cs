@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BatterySocketCheck : MonoBehaviour
 {
-    public bool b_AllBatteriesPlugged = false;
+    public bool b_AllBatteriesPlugged;
     private GameObject[] allChidren;
     private BatteryPlug[] bpScripts;
 
@@ -13,7 +13,6 @@ public class BatterySocketCheck : MonoBehaviour
         bpScripts = GetComponentsInChildren<BatteryPlug>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         b_AllBatteriesPlugged = CheckIfAllReset();
@@ -30,6 +29,7 @@ public class BatterySocketCheck : MonoBehaviour
         }
 
         Debug.Log("Batteries Plugged");
+        PressMachineManager.Instance.triggerActive = true;
         return true;
-        }
+    }
 }
