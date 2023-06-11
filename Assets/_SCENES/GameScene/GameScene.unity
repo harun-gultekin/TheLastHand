@@ -704,6 +704,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7051627712418710320, guid: ea51da4cf1acfea49802848e749a5a13, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 1615121681}
+    - target: {fileID: 7051627712418710320, guid: ea51da4cf1acfea49802848e749a5a13, type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 45966830}
+    - target: {fileID: 7051627712418710320, guid: ea51da4cf1acfea49802848e749a5a13, type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 1173580202}
+    - target: {fileID: 7051627712418710320, guid: ea51da4cf1acfea49802848e749a5a13, type: 3}
+      propertyPath: isAuto
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7051627712418710320, guid: ea51da4cf1acfea49802848e749a5a13, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1610919678157685042}
+    - target: {fileID: 8483467458259523505, guid: ea51da4cf1acfea49802848e749a5a13, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7b67880422c801844bb3cdc374ff221e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea51da4cf1acfea49802848e749a5a13, type: 3}
 --- !u!4 &45966830 stripped
@@ -13439,6 +13463,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4812518354269915709, guid: b6332132a2725a94aae601251758ac52, type: 3}
+--- !u!95 &1615121681 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8483467458259523505, guid: ea51da4cf1acfea49802848e749a5a13, type: 3}
+  m_PrefabInstance: {fileID: 45966829}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1618111898
 GameObject:
   m_ObjectHideFlags: 0
