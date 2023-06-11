@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using LastHand;
+using UnityEngine.SceneManagement;
 using Event = LastHand.Event;
 
 public class PlayerController : MonoBehaviour
@@ -58,7 +60,15 @@ public class PlayerController : MonoBehaviour
         _selfRigidbody = GetComponent<Rigidbody>();
         _selfCollider = GetComponent<Collider>();
     }
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+    }
+
     void LateUpdate()
     {
         if (LevelStateManager.Instance)
