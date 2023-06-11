@@ -40,8 +40,8 @@ public class AgentOliviaScript : MonoBehaviour
 
     private void Update()
     {
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInBustedRange = Physics.CheckSphere(transform.position, bustedRange, whatIsPlayer);
+        playerInSightRange = thePlayerInEnemyFOV && Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInBustedRange = thePlayerInEnemyFOV && Physics.CheckSphere(transform.position, bustedRange, whatIsPlayer);
         
         if (PatrollingType == 1)
         {
