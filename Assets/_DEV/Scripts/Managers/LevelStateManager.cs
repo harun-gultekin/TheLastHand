@@ -66,6 +66,6 @@ public enum LevelState
     MinimapTaken,
     SteamDischarged,
     DoorControlled,
-    VentilationOpened,
-    PressMachineOpened
+    PressMachine,
+    CraneControl
 }
