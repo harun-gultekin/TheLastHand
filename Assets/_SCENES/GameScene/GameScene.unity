@@ -1647,7 +1647,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a1a431a2f058b4f45ae1330646ac845b, type: 2}
     - target: {fileID: 4894867751854407440, guid: 3e015c09e2f8ad40987cee20d4b59615, type: 3}
       propertyPath: m_Name
-      value: PressMachineBattery
+      value: LaserBattery
       objectReference: {fileID: 0}
     - target: {fileID: 5141240431135554840, guid: 3e015c09e2f8ad40987cee20d4b59615, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2807,6 +2807,7 @@ MonoBehaviour:
   currentState: 0
   isCraneActive: 0
   isMinimapPuzzleActive: 0
+  laser: {fileID: 1649815014}
 --- !u!4 &245395824
 Transform:
   m_ObjectHideFlags: 0
@@ -4616,7 +4617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4894867751854407440, guid: 3e015c09e2f8ad40987cee20d4b59615, type: 3}
       propertyPath: m_Name
-      value: BatterySocketPrefab (1)
+      value: PressMachineBattery
       objectReference: {fileID: 0}
     - target: {fileID: 4894867751854407440, guid: 3e015c09e2f8ad40987cee20d4b59615, type: 3}
       propertyPath: m_IsActive
@@ -13353,6 +13354,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1641575352}
   m_CullTransparentMesh: 1
+--- !u!1 &1649815014 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7946730273981225498, guid: 402d4e14a175b9c4f9bab4a700d7d14f, type: 3}
+  m_PrefabInstance: {fileID: 1772814597}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1685289696
 GameObject:
   m_ObjectHideFlags: 0
@@ -14178,6 +14184,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 402d4e14a175b9c4f9bab4a700d7d14f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8613029030878958455, guid: 402d4e14a175b9c4f9bab4a700d7d14f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.425
       objectReference: {fileID: 0}
     - target: {fileID: -7646739597698752262, guid: 402d4e14a175b9c4f9bab4a700d7d14f, type: 3}
       propertyPath: m_Materials.Array.data[0]

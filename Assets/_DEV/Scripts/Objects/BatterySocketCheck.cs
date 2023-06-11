@@ -32,6 +32,11 @@ public class BatterySocketCheck : MonoBehaviour
         {
             PressMachineManager.Instance.triggerActive = true;
         }
+        
+        if (transform.gameObject.name == "LaserBattery")
+        {
+            LevelStateManager.Instance.DeactivateLaser();
+        }
         return true;
     }
 }

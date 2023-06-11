@@ -8,12 +8,13 @@ public class LevelStateManager : MonoBehaviour
 
     public bool isCraneActive;
     public bool isMinimapPuzzleActive;
-
+    
+    public GameObject laser;
     private void Awake()
     {
         Instance = this;
     }
-
+    
     private void OnEnable()
     {
         Events.Menu.StartGameButton += StartGameButton;
@@ -31,7 +32,11 @@ public class LevelStateManager : MonoBehaviour
         Events.GamePlay.OnCraneCollider -= OnCraneCollider;
         Events.UIGamePlay.OnCraneClose -= OnCraneClose;
     }
-    
+
+    public void DeactivateLaser()
+    {
+        laser.SetActive(false);
+    }
     private void StartGameButton()
     {
         currentState = LevelState.Started;
