@@ -8,14 +8,14 @@ public class CraneController : MonoBehaviour
    [SerializeField] private GameObject horizontalMoveObject;
    [SerializeField] private GameObject forwardBackMoveObject;
 
-   [SerializeField] private float speed = 5f;
+   [SerializeField] private float speed = 15f;
    private float _verticalSpeed;
    private float _horizontalSpeed;
    private float _forwardSpeed;
    
    public void MoveUp()
    {
-      _verticalSpeed = 4f;
+      _verticalSpeed = 10f;
       Vector3 movementDown = new Vector3(transform.position.x, _verticalSpeed, transform.position.z);
       movementDown.Normalize();
       verticalMoveObject.transform.Translate(movementDown * speed * Time.deltaTime);
@@ -23,7 +23,7 @@ public class CraneController : MonoBehaviour
 
    public void MoveDown()
    {
-      _verticalSpeed = -4f;
+      _verticalSpeed = -10f;
       Vector3 movementDown = new Vector3(transform.position.x, _verticalSpeed, transform.position.z);
       movementDown.Normalize();
       verticalMoveObject.transform.Translate(movementDown * speed * Time.deltaTime);
@@ -31,7 +31,7 @@ public class CraneController : MonoBehaviour
    
    public void MoveRight()
    {
-      _horizontalSpeed = -4f;
+      _horizontalSpeed = -10f;
       Vector3 movement = new Vector3(_horizontalSpeed, transform.position.y,  transform.position.z);
       movement.Normalize();  
       horizontalMoveObject.transform.Translate(movement * speed * Time.deltaTime);
@@ -39,7 +39,7 @@ public class CraneController : MonoBehaviour
    
    public void MoveLeft()
    {
-      _horizontalSpeed = 4f;
+      _horizontalSpeed = 10f;
       Vector3 movement = new Vector3(_horizontalSpeed, transform.position.y,  transform.position.z);
       movement.Normalize();  
       horizontalMoveObject.transform.Translate(movement * speed * Time.deltaTime);
@@ -47,7 +47,7 @@ public class CraneController : MonoBehaviour
    
    public void MoveForward()
    {
-      _forwardSpeed = -4f;
+      _forwardSpeed = -10f;
       Vector3 movementDown = new Vector3(transform.position.x, transform.position.y, _forwardSpeed);
       movementDown.Normalize();
       forwardBackMoveObject.transform.Translate(movementDown * speed * Time.deltaTime);
@@ -55,7 +55,7 @@ public class CraneController : MonoBehaviour
    
    public void MoveBack()
    {
-      _forwardSpeed = 4f;
+      _forwardSpeed = 10f;
       Vector3 movementDown = new Vector3(transform.position.x, transform.position.y, _forwardSpeed);
       movementDown.Normalize();
       forwardBackMoveObject.transform.Translate(movementDown * speed * Time.deltaTime);
