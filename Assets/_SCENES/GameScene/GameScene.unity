@@ -9060,6 +9060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 985955917}
+  - component: {fileID: 985955918}
   m_Layer: 5
   m_Name: AgentAlarmBar
   m_TagString: Untagged
@@ -9091,6 +9092,23 @@ RectTransform:
   m_AnchoredPosition: {x: -603, y: -452}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &985955918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985955916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5829b121499efa64cb78097000d1fae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alarmBar: {fileID: 1641575352}
+  OnlyWhiteColor: 0
+  alarmBarLevel: {x: 0, y: 1, z: 1}
+  theAlarmBarLevel: {fileID: 2567478180121489960}
+  animationTime: 0
 --- !u!1 &987638997
 GameObject:
   m_ObjectHideFlags: 0
