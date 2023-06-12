@@ -1887,6 +1887,7 @@ MonoBehaviour:
   gameOverPanel: {fileID: 814190486}
   alertText: {fileID: 735972549}
   startGameButton: {fileID: 1114834181}
+  exitGameButton: {fileID: 119036534}
   puzzleBackButton: {fileID: 932167929}
   craneBackButton: {fileID: 374782975}
 --- !u!4 &167613465

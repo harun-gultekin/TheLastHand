@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     public Text alertText;
     
     [SerializeField] private Button startGameButton;
+    [SerializeField] private Button exitGameButton;
+
     [SerializeField] private Button puzzleBackButton;
     [SerializeField] private Button craneBackButton;
     
@@ -39,6 +41,11 @@ public class UIManager : MonoBehaviour
             Events.Menu.StartGameButton.Call();
             DeActivatePanel(menuPanel);
             ActivatePanel(mainPanel);
+        });
+        
+        exitGameButton.onClick.AddListener(() =>
+        {
+            Application.Quit();
         });
         
         puzzleBackButton.onClick.AddListener(() =>
@@ -69,6 +76,7 @@ public class UIManager : MonoBehaviour
         Events.GamePlay.OnDrawerExit -= OnDrawerExit;
         
         startGameButton.onClick.RemoveAllListeners();
+        exitGameButton.onClick.RemoveAllListeners();
         puzzleBackButton.onClick.RemoveAllListeners();
         craneBackButton.onClick.RemoveAllListeners();
     }
