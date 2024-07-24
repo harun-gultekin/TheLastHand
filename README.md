@@ -3,7 +3,6 @@
 
 ![alt text](https://github.com/harun-gultekin/TheLastHand/blob/main/ReadMeResources/1.png?raw=true)
 
-ITU Game And Interaction Technologies
 
 The Last Hand is an action-adventure puzzle game in a futuristic environment where the player takes
 control of a surviving robot hand who has escaped from a lab after a human vs robot war and must
