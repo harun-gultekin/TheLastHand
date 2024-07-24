@@ -11,7 +11,7 @@ navigate through a dangerous city while avoiding obstacles and enemies. The game
 fast-paced, platforming gameplay and challenging puzzles that require quick reflexes and strategic
 thinking.
 
-![alt text](https://github.com/harun-gultekin/TheLastHand/blob/main/ReadMeResources/Akso_1.png?raw=true)
+![alt text](https://github.com/harun-gultekin/TheLastHand/blob/main/ReadMeResources/Akso_1.jpg?raw=true)
 
 ## GAME PLAY & MECHANICS
 
